@@ -6,7 +6,7 @@ In class assignment: Make a website together!
 * then with gitbash or terminal application type ```cd ~/Documents```
 * then type ```git clone https://github.com/CharStiles/cc.git```
 * then type ``` cd cc```
-* then type ``mkdir yourName``` where yourName is your name
+* then type ```mkdir yourName``` where yourName is your name
 * then type ```git add .```
 * then type ```git commit -m "init"```
 * then type ```git push```
