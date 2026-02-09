@@ -1,1 +1,111 @@
+let R = 255;
+let G = 0;
+let B = 0;
+let c = 255; //backgroundcolor
+let noel = true; //show ellipse
+let magicnumber = 0;
+let suma = R + G + B;
+let i = 0;
+function setup() {
+  createCanvas(1000, 1000);
+  background(c);
+randomcolors();
+  // frameRate(1);
+}
+
+function draw() {
+  magicnumber = mouseY / 3.1 - mouseX / 9.2;
+  A = map(mouseX, 0, width, 255, 0); //Alpha
+  // print ('A='+ A);
+  if (mouseIsPressed) {
+    if (R === 255 && G === 0 && B < 255) {
+      //255,0,0
+      B = B + 1;
+      // print ('if R > mid');
+    } else if (R > 0 && G === 0 && B === 255) {
+      //255,0,255
+      R = R - 1;
+      // print ('if mid>B');
+    } else if (R === 0 && G < 255 && B === 255) {
+      //0,0,255
+      G = G + 1;
+      // print ('if B>mid');
+    } else if (R === 0 && G === 255 && B > 0) {
+      //0,255,255
+      B = B - 1;
+      // print ('if mid>G');
+    } else if (R < 255 && G === 255 && B === 0) {
+      //0,255,0
+      R = R + 1;
+      // print ('if G>mid');
+      // print ('Red '+R);
+      // print ('Green '+G);
+      // print ('Blue '+B);
+    } else if (R === 255 && G > 0 && B === 0) {
+      //255,255,0
+      G = G - 1;
+      // print ('if mid>R');
+    } else {
+      //prints error with the color of the error
+      // print ('error');
+      // print (R + ',' + G + ',' + B);
+      fill(R, G, B, A);
+      suma = R + G + B;
+      if (i <= suma) {
+        text("error", mouseX, mouseY);
+        // print (i);
+        i = i + 1;
+        noel = false;
+        // print (noel);
+      } else if ((i = suma)) {
+        R = 255;
+        G = 0;
+        B = 0;
+        i = 0;
+      }
+    }
+    fill(R, G, B, A);
+  } else {
+    // R = 255;
+    // G = 255;
+    // B = 255;
+    fill(255-c, A);
+    textSize(magicnumber);
+    text("click", mouseX + magicnumber / 2, mouseY + magicnumber / 2);
+  }
+  stroke(c);
+  // noStroke();
+  if (noel === true) {
+    ellipse(mouseX, mouseY, magicnumber);
+    // print (noel);
+  }
+  noel = true;
+}
+function randomcolors(){
+  R = random(255);
+  G = random(255);
+  B = random(255);
+}
+
+/*function backcolor(x){
+  if (x <= 0){
+    x = 255;
+  }
+  c = x;
+  background(x);
+}*/
+
+function backcolor(){
+  c = c - 10;
+  if (c<=0){
+    c=255;
+  }
+  background(c);
+}
+
+function doubleClicked() {
+  //save("raInBoWWarM.jpg");
+  backcolor();  
+  randomcolors();
+}
 
