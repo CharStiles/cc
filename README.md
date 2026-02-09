@@ -1,3 +1,14 @@
+** Day 2**
+
+resources: 
+(10print)[https://10print.org]
+(When the Machine Made Art)[https://www.bloomsbury.com/us/when-the-machine-made-art-9781623562724/]
+A New Program for Graphic Design
+(Design by numbers)[https://dbn.media.mit.edu/info/dbn-on-web/dbn.jar]
+(fish draw)[https://github.com/LingDong-/fishdraw]
+
+
+
 **Day 1**
 
 In class assignment: Make a website together!
