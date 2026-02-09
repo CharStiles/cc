@@ -18,6 +18,7 @@ Homework:
 modify an existing p5.js sketch, credit where you got it in a comment at the top, create an index.html page in your folder and add the sketch to that index.html 
 
 Where you can find existing p5.js sketches: 
+* we looked at this one in class: [https://editor.p5js.org/Char/sketches/XHy8RcZ-j]
 * [https://showcase.p5js.org/#/2022-All]
 * [https://openprocessing.org/]
 * search online like github
