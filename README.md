@@ -2,8 +2,7 @@ In class assignment: Make a website together!
 
 * make a github account & write your username in the zoom chat
 * accept the invitation to collaborate on this repo
-* if you have windows download gitbash
-* then with gitbash or terminal application type ```cd ~/Documents```
+* then open command prompt or terminal application and type ```cd ~/Documents``` hit enter
 * then type ```git clone https://github.com/CharStiles/cc.git``` and hit enter
 * then type ``` cd cc``` and hit enter
 * then type ```mkdir yourName``` where yourName is your name, and hit enter
