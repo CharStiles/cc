@@ -1,7 +1,7 @@
-let R = 255;
+let R = 0;
 let G = 0;
 let B = 0;
-let c = 255; //backgroundcolor
+let c = 0; //backgroundcolor
 let noel = true; //show ellipse
 let magicnumber = 0;
 let suma = R + G + B;
@@ -52,7 +52,7 @@ function draw() {
       fill(R, G, B, A);
       suma = R + G + B;
       if (i <= suma) {
-        text("error", mouseX, mouseY);
+        text("Error", mouseX, mouseY);
         // print (i);
         i = i + 1;
         noel = false;
@@ -108,4 +108,3 @@ function doubleClicked() {
   backcolor();  
   randomcolors();
 }
-
