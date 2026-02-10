@@ -8,6 +8,8 @@ In class we went over:
 * changing shapes (using triangle)
 * changing the color mode
 * adding an image
+* [Sketch that uses coordinate system and images](https://editor.p5js.org/Char/sketches/DQt1VowIo)
+* [sketch that uses noise and shapes](https://editor.p5js.org/Char/sketches/60Ncecfoy)
 
 Resources: 
 
