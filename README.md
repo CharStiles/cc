@@ -1,6 +1,26 @@
-**Day 2**
+**Day 3**
 
-In class assignment: make your home page!
+In class we went over:
+
+* Golan's banded [clock](https://editor.p5js.org/golan/sketches/SkjKxM8DX)
+* Char's mischevious [clock](https://editor.p5js.org/Char/sketches/UVFhMZggD)
+* Dan Shiffman [video on making a clock ](https://www.youtube.com/watch?v=E4RyStef-gY)
+
+
+homework:
+
+Design a "visual clock" that displays a novel or unconventional representation of the time. Your clock should appear different at all times of the day, and it should repeat its appearance every 24 hours (or other relevant cycle, if desired). Challenge yourself to convey the time without numerals.
+You are encouraged to question basic assumptions about how time is mediated and represented. Ponder concepts like biological time (chronobiology), ultradian and infradian rhythms, solar and lunar cles, celestial time and sidereal time, decimal time, metric time, geological time, historical time, psychological time, and subjective time. Inform your design by reading about the history of timekeeping systems and devices and their transformative effects on
+
+Learning Objectives
+• Review and research historical methods, devices, and systems for timekeeping
+• Devise graphic concepts and technologies for representing time that go beyond conventional methods of visualization and mediation
+• Use programming to design, through the control of shape, color, form, and motion
+• Apply motion graphics techniques to the representation of temporal
+
+Credit for the words of this assignment goes to [Code as a Creative Medium](https://mitpress.mit.edu/9780262542043/code-as-creative-medium/). This is a classic assignment that has been given to creative coding students since the 1990s!
+
+**Day 2**
 
 In class we went over:
 
