@@ -2,6 +2,13 @@
 
 In class assignment: make your home page!
 
+In class we went over:
+
+* using the noise function
+* changing shapes (using triangle)
+* changing the color mode
+* adding an image
+
 Resources: 
 
 * book: [10print](https://10print.org) 
@@ -14,7 +21,7 @@ Resources:
 
 Homework:
 
-Create a generative art piece, think of new ways to use random and noise. Everytime the user clicks (or some other interaction) the piece should regenerate.
+Create a generative art piece. Think about how the functions we used in class can be used differently than we used them. Everytime the user clicks the piece should regenerate.
 
 **Day 1**
 
