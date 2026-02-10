@@ -1,13 +1,13 @@
-** Day 2**
+**Day 2**
 
 resources: 
 
-[10print](https://10print.org) 
-[When the Machine Made Art](https://www.bloomsbury.com/us/when-the-machine-made-art-9781623562724/)
-[A New Program for Graphic Design](https://a-new-program-for-graphic-design.org/)
-[Design by numbers](https://dbn.media.mit.edu/info/dbn-on-web/dbn.jar)
-[fish draw](https://github.com/LingDong-/fishdraw)
-[shan shui](https://shan-shui-inf.lingdong.works/)
+* [10print](https://10print.org) 
+* [When the Machine Made Art](https://www.bloomsbury.com/us/when-the-machine-made-art-9781623562724/)
+* [A New Program for Graphic Design](https://a-new-program-for-graphic-design.org/)
+* [Design by numbers](https://dbn.media.mit.edu/info/dbn-on-web/dbn.jar)
+* [fish draw](https://github.com/LingDong-/fishdraw)
+* [shan shui](https://shan-shui-inf.lingdong.works/)
 
 
 
