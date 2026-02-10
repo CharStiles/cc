@@ -4,12 +4,13 @@ In class assignment: make your home page!
 
 Resources: 
 
-* [10print](https://10print.org) 
-* [When the Machine Made Art](https://www.bloomsbury.com/us/when-the-machine-made-art-9781623562724/)
-* [A New Program for Graphic Design](https://a-new-program-for-graphic-design.org/)
-* [Design by numbers](https://dbn.media.mit.edu/info/dbn-on-web/dbn.jar)
-* [fish draw](https://github.com/LingDong-/fishdraw)
-* [shan shui](https://shan-shui-inf.lingdong.works/)
+* book: [10print](https://10print.org) 
+* book: [When the Machine Made Art](https://www.bloomsbury.com/us/when-the-machine-made-art-9781623562724/)
+* book: [A New Program for Graphic Design](https://a-new-program-for-graphic-design.org/)
+* book: [Design by numbers](https://dbn.media.mit.edu/info/dbn-on-web/dbn.jar)
+* generative work: [fish draw](https://github.com/LingDong-/fishdraw)
+* generative work: [shan shui](https://shan-shui-inf.lingdong.works/)
+* tutorial: [Reaction Diffusion](https://www.karlsims.com/rd.html)
 
 Homework:
 
