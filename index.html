@@ -9,7 +9,7 @@
       body {
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        overflow: auto;
       }
       
       #sketch-container {
@@ -29,9 +29,11 @@
         height: 100%;
         z-index: 10;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         pointer-events: none;
+        overflow-y: auto;
+        padding: 20px 0;
       }
       
       #list-content {
@@ -41,6 +43,7 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         pointer-events: auto;
         max-width: 600px;
+        margin: auto;
       }
       
       h1 {
@@ -72,6 +75,11 @@
         color: #004499;
         text-decoration: underline;
       }
+      
+      .sub-list {
+        padding-left: 30px;
+        margin-top: 8px;
+      }
     </style>
   </head>
   <body>
@@ -79,18 +87,68 @@
     
     <div id="list-overlay">
       <div id="list-content">
-        <h1>Creative Coding Students</h1>
-        <ul>
-          <li><a href="Courtney/index.html">Courtney</a></li>
-          <li><a href="Kevin-zezai/index.html">Kevin-zezai</a></li>
-          <li><a href="LUNA1/index.html">LUNA1</a></li>
-          <li><a href="char/index.html">char</a></li>
-          <li><a href="mcqueen/index.html">mcqueen</a></li>
-          <li><a href="yhndu/index.html">yhndu</a></li>
-          <li><a href="yhndu1/index.html">yhndu1</a></li>
-          <li><a href="yuechenZhang/index.html">yuechenZhang</a></li>
-          <li><a href="zhiheng/index.html">zhiheng</a></li>
-        </ul>
+        <h1>Creative Coding Class at IGA!</h1>
+        <div>
+
+          <ul>
+            <li class="student-item">
+              <span class="student-name">Courtney</span>
+              <ul class="sub-list">
+                <li><a href="Courtney/index.html">homework1</a></li>
+                <li><a href="Courtney/homework2.html">homework2</a></li>
+              </ul>
+            </li>
+            <li class="student-item">
+              <span class="student-name">Kevin-zezai</span>
+              <ul class="sub-list">
+                <li><a href="Kevin-zezai/index.html">homework1</a></li>
+                <li><a href="Kevin-zezai/Homework 2/index.html">homework2</a></li>
+              </ul>
+            </li>
+            <li class="student-item">
+              <span class="student-name">LUNA1</span>
+              <ul class="sub-list">
+                <li><a href="LUNA1/index.html">homework1</a></li>
+                <li><a href="LUNA1/homework2.html">homework2</a></li>
+              </ul>
+            </li>
+            <li class="student-item">
+              <span class="student-name">mcqueen</span>
+              <ul class="sub-list">
+                <li><a href="mcqueen/index.html">homework1</a></li>
+                <li><a href="mcqueen/homework2/index.html">homework2</a></li>
+              </ul>
+            </li>
+            <li class="student-item">
+              <span class="student-name">yhndu</span>
+              <ul class="sub-list">
+                <li><a href="yhndu/index.html">homework1</a></li>
+                <li><a href="yhndu/homework2.html">homework2</a></li>
+              </ul>
+            </li>
+            <li class="student-item">
+              <span class="student-name">yhndu1</span>
+              <ul class="sub-list">
+                <li><a href="yhndu1/index.html">homework1</a></li>
+                <li><a href="yhndu1/homework2.html">homework2</a></li>
+              </ul>
+            </li>
+            <li class="student-item">
+              <span class="student-name">yuechenZhang</span>
+              <ul class="sub-list">
+                <li><a href="yuechenZhang/index.html">homework1</a></li>
+                <li><a href="yuechenZhang/homework2.html">homework2</a></li>
+              </ul>
+            </li>
+            <li class="student-item">
+              <span class="student-name">zhiheng</span>
+              <ul class="sub-list">
+                <li><a href="zhiheng/index.html">homework1</a></li>
+                <li><a href="zhiheng/homework2/index.html">homework2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
         <br>
         <a href="Creative_coding_charStiles.pdf">
         <h1>Syllabus</h1>
