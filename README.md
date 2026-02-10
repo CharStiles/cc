@@ -1,6 +1,8 @@
 **Day 2**
 
-resources: 
+In class assignment: make your home page!
+
+Resources: 
 
 * [10print](https://10print.org) 
 * [When the Machine Made Art](https://www.bloomsbury.com/us/when-the-machine-made-art-9781623562724/)
@@ -9,7 +11,9 @@ resources:
 * [fish draw](https://github.com/LingDong-/fishdraw)
 * [shan shui](https://shan-shui-inf.lingdong.works/)
 
+Homework:
 
+Create a generative art piece, think of new ways to use random and noise. Everytime the user clicks (or some other interaction) the piece should regenerate.
 
 **Day 1**
 
