@@ -23,7 +23,7 @@ Resources:
 
 Homework:
 
-Create a generative art piece. Think about how the functions we used in class can be used differently than we used them. Everytime the user clicks the piece should regenerate.
+Create a generative art piece. Think about how the functions we used in class can be used differently than we used them. 
 
 **Day 1**
 
