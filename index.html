@@ -1,24 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Coding - Student Index</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      
+      #sketch-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      
+      #list-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+      }
+      
+      #list-content {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        pointer-events: auto;
+        max-width: 600px;
+      }
+      
+      h1 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-family: Arial, sans-serif;
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      li {
+        margin: 12px 0;
+      }
+      
+      a {
+        text-decoration: none;
+        color: #0066cc;
+        font-size: 18px;
+        font-family: Arial, sans-serif;
+        display: inline-block;
+        transition: color 0.2s;
+      }
+      
+      a:hover {
+        color: #004499;
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
-    <main></main>
-    <script>
+    <div id="sketch-container"></div>
     
+    <div id="list-overlay">
+      <div id="list-content">
+        <h1>Creative Coding Students</h1>
+        <ul>
+          <li><a href="Courtney/index.html">Courtney</a></li>
+          <li><a href="Kevin-zezai/index.html">Kevin-zezai</a></li>
+          <li><a href="LUNA1/index.html">LUNA1</a></li>
+          <li><a href="char/index.html">char</a></li>
+          <li><a href="mcqueen/index.html">mcqueen</a></li>
+          <li><a href="yhndu/index.html">yhndu</a></li>
+          <li><a href="yhndu1/index.html">yhndu1</a></li>
+          <li><a href="yuechenZhang/index.html">yuechenZhang</a></li>
+          <li><a href="zhiheng/index.html">zhiheng</a></li>
+        </ul>
+        <br>
+        <a href="Creative_coding_charStiles.pdf">
+        <h1>Syllabus</h1>
+        <div class="syllabus-link">
+          📄 </a>
+        </div>
 
-function setup() {
-  createCanvas(windowWidth, windowHeight);
+      </div>
 
-}
+    </div>
+    
+    <script>
+      function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.parent('sketch-container');
+      }
 
-function draw() {
-  ellipse(mouseX,mouseY, 50, 50)
-
-}
-
-
+      function draw() {
+        ellipse(mouseX, mouseY, 50, 50);
+      }
     </script>
   </body>
 </html>
