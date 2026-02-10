@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+  
+  
+
+function setup() {
+  createCanvas(400, 400);
+  strokeWeight(2);
+  colorMode(HSL);
+}
+
+function draw() {
+  background(220);
+  
+  var color1 = color(0, 255, 25);
+  var color2 = color(150, 255, 25);
+  
+  var vertical1Points = [];
+  var vertical2Points = [];
+  var horizontal1Points = [];
+  var horizontal2Points = [];
+  
+  for(var i = 0 ; i < 100; i++){
+    var currentColor;
+    
+    currentColor = lerpColor(color1, color2, i/100);
+    stroke(currentColor);
+    var y1 = noise(i+10, frameCount/100) * 100 + 100;
+    vertical1Points.push({x: y1, y: i*10});
+    if(i > 0) {
+      line(vertical1Points[i-1].x, vertical1Points[i-1].y, y1, i*10);
+    }
+    
+    currentColor = lerpColor(color2, color1, i/100);
+    stroke(currentColor);
+    var y2 = noise(i+10, frameCount/100) * 100 + 100;
+    horizontal1Points.push({x: i*10, y: y2});
+    if(i > 0) {
+      line((i-1)*10, horizontal1Points[i-1].y, i*10, y2);
+    }
+    
+    currentColor = lerpColor(color(0), color2, i/100);
+    stroke(currentColor);
+    var y3 = noise(i+200, frameCount/100) * 100 + 200;
+    horizontal2Points.push({x: i*10, y: y3});
+    if(i > 0) {
+      line((i-1)*10, horizontal2Points[i-1].y, i*10, y3);
+    }
+    
+    currentColor = lerpColor(color1, color(255), i/100);
+    stroke(currentColor);
+    var y4 = noise(i+200, frameCount/100) * 100 + 200;
+    vertical2Points.push({x: y4, y: i*10});
+    if(i > 0) {
+      line(vertical2Points[i-1].x, vertical2Points[i-1].y, y4, i*10);
+    }
+  }
+  
+  colorMode(RGB);
+  fill(0, 0, 255, 128);
+  noStroke();
+  beginShape();
+
+  for(let i = 0; i < vertical1Points.length; i++) {
+    vertex(vertical1Points[i].x, vertical1Points[i].y);
+  }
+  
+  for(let i = vertical2Points.length - 1; i >= 0; i--) {
+    vertex(vertical2Points[i].x, vertical2Points[i].y);
+  }
+  endShape(CLOSE);
+  
+  fill(255, 0, 0, 128);
+  beginShape();
+
+  
+  for(let i = 0; i < horizontal1Points.length; i++) {
+    vertex(horizontal1Points[i].x, horizontal1Points[i].y);
+  }
+
+  
+  for(let i = horizontal2Points.length - 1; i >= 0; i--) {
+    vertex(horizontal2Points[i].x, horizontal2Points[i].y);
+  }
+  endShape(CLOSE);
+  
+
+  colorMode(HSL);
+  strokeWeight(2);
+}
+
+  </script>
+  </body>
+</html>
