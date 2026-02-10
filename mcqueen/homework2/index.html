@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>var pList = []
+var p2List = []
+var rador = 50
+var rad = 50
+
+var decS = 0.25
+var oecS = 0.25
+
+var rad3 = -1
+var posX = -1
+var posY = -1
+
+function setup() {
+  createCanvas(400, 400);
+  for (i = 0; i <=360; i++){
+    pList.push([i,rad])
+  }
+  
+}
+function rad2pos(ang,rad,x,y){
+  var x1 = x + cos(ang/180* Math.PI)*rad
+  var y1 = y + sin(ang/180* Math.PI)*rad
+  return [x1,y1]
+}
+function draw() {
+  background(220);
+  if (mouseIsPressed){
+    decS = min(decS*1.02,1.2)
+    oecS = 0.25
+    rad =max(rad-decS,0)
+  }else{
+    oecS = min(oecS*1.2,3)
+    decS = 0.25
+    rad = min(rad+oecS,rador)
+  }
+  if (rad3 != -1){
+    rad3 += 5*oecS
+    noFill();
+    
+    for  (i = 0; i <=10; i++){
+      circle(posX, posY, rad3+i);
+    }
+    fill(120)
+  }
+  
+  if (rad <= 1 && mouseIsPressed == false){
+    posX = mouseX
+    posY = mouseY
+    rad3 = 0
+  }
+  if (rad3>=800){
+    rad3 = -1
+  }
+  var newList = []
+  orp= pList[0]
+  treX = random(-1,1)*(decS-0.25)*5
+  treY = random(-1,1)*(decS-0.25)*5
+  let rad2 = 0
+  for (i = 0; i <=360; i++){
+    rad2 = noise(i,rad,frameCount/100,decS)*30+rad
+    newList.push([i,rad2])
+    strokeWeight(5);
+    line(rad2pos(i,pList[i][1],mouseX+treX,mouseY+treY)[0],rad2pos(i,pList[i][1],mouseX+treX,mouseY+treY)[1],rad2pos(i,rad2,mouseX+treX,mouseY)[0],rad2pos(i,rad2,mouseX+treX,mouseY+treY)[1])
+    lastp = [i,rad2]
+    newList.push(lastp)
+  }
+  pList = newList
+  
+  line(rad2pos(orp[0],orp[1],mouseX,mouseY)[0],rad2pos(orp[0],orp[1],mouseX,mouseY)[1],rad2pos(i,rad2,mouseX,mouseY)[0],rad2pos(i,rad2,mouseX,mouseY)[1])
+  
+}
+</script>
+  </body>
+</html>
