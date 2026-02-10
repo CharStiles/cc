@@ -1,1 +1,19 @@
+function setup() {
+  createCanvas(400, 400);
+}
 
+function draw() {
+  background(0,0,220);
+   circle(mouseX,mouseY,50)
+  
+  stroke(225)
+  
+  if(mouseIsPressed==true){
+    text("yooo",mouseX,mouseY)
+    
+    } else{
+      text("ERROR",mouseX,mouseY)
+    }
+  
+  
+}
