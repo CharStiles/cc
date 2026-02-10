@@ -1,0 +1,19 @@
+function setup() {
+  createCanvas(400, 400);
+  noStroke()
+}
+
+function draw() {
+  background(0)
+  
+  for(var i=0 ; i<100 ; i++){
+  
+    var Size=10
+    
+    i*10,noise(i,frameCount/50)*200+Size,i*10 +Size,noise(i,frameCount/100)*100
+    
+    circle(i*10,noise(i,frameCount/100)*100+200,10)
+  }
+  
+    
+}
