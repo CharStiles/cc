@@ -3,6 +3,7 @@
 In class we went over:
 
 * Golan's banded [clock](https://editor.p5js.org/golan/sketches/SkjKxM8DX)
+* clock [made in class](https://editor.p5js.org/Char/sketches/EqO0ueH4g)
 * Char's mischevious [clock](https://editor.p5js.org/Char/sketches/UVFhMZggD)
 * Dan Shiffman [video on making a clock ](https://www.youtube.com/watch?v=E4RyStef-gY)
 * Dan Shiffman's [slitscan](https://editor.p5js.org/Char/sketches/6_PHNga52)
