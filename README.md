@@ -5,7 +5,7 @@ In class we went over:
 * Golan's banded [clock](https://editor.p5js.org/golan/sketches/SkjKxM8DX)
 * clock [made in class](https://editor.p5js.org/Char/sketches/EqO0ueH4g)
 * Char's mischevious [clock](https://editor.p5js.org/Char/sketches/UVFhMZggD)
-* Dan Shiffman [video on making a clock ](https://www.youtube.com/watch?v=E4RyStef-gY)
+* Dan Shiffman [video on making a clock ](https://www.youtube.com/watch?v=E4RyStef-gY) and the [clock he made](https://editor.p5js.org/codingtrain/sketches/2lvHFWPbW)
 * Dan Shiffman's [slitscan](https://editor.p5js.org/Char/sketches/6_PHNga52)
 * Dan Shiffman's youtube [channel](https://www.youtube.com/@TheCodingTrain)
 
