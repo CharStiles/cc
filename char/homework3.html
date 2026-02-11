@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+  
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+  
+  function setup() {
+  createCanvas(400, 400);
+}
+
+function polarToCartesian(radius, degrees) {
+  const radians = degrees * (Math.PI / 180);
+  return {
+    x: radius * Math.cos(radians),
+    y: radius * Math.sin(radians)
+  };
+}
+
+
+function draw() {
+  
+  var c = color( (second()/60.) * 256,(minute()/60.) * 256, (hour()/60.) * 256)
+  
+  background(c);
+  
+  translate(width/2, height/2); // Move origin to center
+
+  for(var i = 0 ; i < 100; i++){
+    
+    var pos;
+    if( (i/100) - (second()/60) < 0.005 &&  (i/100) -(second()/60) > -0.005 ){
+      pos = {x:0,y:0};
+    }
+    else{
+       pos = polarToCartesian(hour()*3, i/100 * 360);
+    }
+    circle(pos.x,pos.y, 50);
+
+  }
+  
+  
+}
+
+  
+  </script>
+  </body>
+</html>
