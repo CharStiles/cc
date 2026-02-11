@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Time Capture</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main></main>
+
+    <script>
+      // adapted from one of my old sketches tutored by chatGPT
+      // i'm tweaking each part to gain better understanding
+
+      let hourCircles = [];
+      let minuteCircles = [];
+
+      // frozen time values
+      let frozenHour;
+      let frozenMinute;
+
+      function setup() {
+        createCanvas(400, 400);
+
+        // Capture real time ONCE
+        frozenHour = hour();     // 0–23
+        frozenMinute = minute(); // 0–59
+
+        // Hour hand: 6 circles
+        let hourInitialRadius = 12;
+        for (let i = 0; i < 6; i++) {
+          hourCircles.push({
+            radius: hourInitialRadius - i * 2.8, // diminishing circle
+            offsetX: i * 27, // "extend out" like a hand
+          });
+        }
+
+        // Minute hand: 12 circles, half size, longer
+        let minuteInitialRadius = hourInitialRadius * 0.5;
+        let minuteSpacing = 15;
+
+        for (let i = 0; i < 12; i++) {
+          minuteCircles.push({
+            radius: max(1, minuteInitialRadius - i * (2.8 * 0.5)),
+            offsetX: i * minuteSpacing,
+          });
+        }
+
+        noLoop(); // freeze draw() after first render
+      }
+
+      function draw() {
+        background(0);
+
+        let circleX = width / 2;
+        let circleY = height / 2;
+
+        // Convert to clock logic
+        let hour12 = (frozenHour % 12) + frozenMinute / 60;
+        // number of hours accommodating 24h timer, then fraction of hour elapsed in minute / 60 min per hour;
+        // this functions in fractional hours, not angles
+
+        let minuteAngle = radians(frozenMinute * 6 - 90);
+        let hourAngle = radians(hour12 * 30 - 90);
+
+        // Draw hands
+        drawHand(minuteCircles, circleX, circleY, minuteAngle);
+        drawHand(hourCircles, circleX, circleY, hourAngle);
+
+        // Center dot
+        noStroke();
+        fill(255);
+        ellipse(circleX, circleY, 6);
+      }
+
+      function drawHand(circles, circleX, circleY, angle) {
+        let originX = circleX - circles[0].offsetX;
+        let originY = circleY;
+
+        push();
+        translate(originX, originY);
+        rotate(angle);
+
+        noStroke();
+        fill(255);
+        for (let c of circles) {
+          ellipse(c.offsetX, 0, c.radius * 2);
+        }
+        pop();
+      }
+    </script>
+  </body>
+</html>
