@@ -12,7 +12,7 @@ In class we went over:
 homework:
 
 Design a "visual clock" that displays a novel or unconventional representation of the time. Your clock should appear different at all times of the day, and it should repeat its appearance every 24 hours (or other relevant cycle, if desired). Challenge yourself to convey the time without numerals.
-You are encouraged to question basic assumptions about how time is mediated and represented. Ponder concepts like biological time (chronobiology), ultradian and infradian rhythms, solar and lunar cles, celestial time and sidereal time, decimal time, metric time, geological time, historical time, psychological time, and subjective time. Inform your design by reading about the history of timekeeping systems and devices and their transformative effects on
+You are encouraged to question basic assumptions about how time is mediated and represented. Ponder concepts like biological time (chronobiology), ultradian and infradian rhythms, solar and lunar cles, celestial time and sidereal time, decimal time, metric time, geological time, historical time, psychological time, and subjective time. Inform your design by reading about the history of timekeeping systems and devices and their transformative effects on society
 
 Learning Objectives
 • Review and research historical methods, devices, and systems for timekeeping
