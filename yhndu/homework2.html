@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <main></main>
+    <script>
+let meow;
+let woof;
 
+
+function preload(){
+  soundFormats('mp3');
+  meow = loadSound('meow.mp3');
+  woof = loadSound('woof.mp3');
+}
+
+var doge
+var maxwell
+
+function setup() {
+  let cnv = createCanvas(400, 400);
+  cnv.mousePressed();
+  noStroke();
+  doge = loadImage('Doge.png');
+  maxwell = loadImage('maxwell.png');
+}
+
+function mousePressed() {
+  if(mouseY < 200)  {
+      woof.play();
+  }
+  else{
+    meow.play();
+  }
+  }
+
+function draw() {
+  background(220);
+
+  
+  for(var i = 0 ; i < 100; i++){
+
+    image(doge, i*10, noise(i, frameCount/100)*100 +50, 50,50)
+    image(maxwell,i*10, noise(i, frameCount/100)*100 +200,50,50)
+  
+    }
+
+}
+      
+    </script>
+  </body>
+</html>
