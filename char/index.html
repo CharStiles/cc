@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <body>
-
-    <a href=  "homework2.html"> homework2 </a>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+  
     
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+
+    w=window
+k="cursor"
+w.setup=_=>(c=createCanvas(999,999,l=line))
+w.draw=_=>mouseIsPressed?c.style(k,"grabbing",x=mouseX,y=mouseY,o=pmouseX,
+p=pmouseY,l(o+2,p,x+2,y),l(o-1,p,x-1,y),l(o+5,p+2,x+5,y+2),l(o-4,p,x-4,y),l(o-7,p+5,x-7,y+5)):c.style(k,"grab")
+
+
+
+  
+</script>
   </body>
 </html>
