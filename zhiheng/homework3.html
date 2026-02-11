@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+  
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+      
+let totalPoints = 60;  
+let innerPoints = [];
+let outerPoints = [];
+let innerRadius, outerRadius;
+
+function setup() {
+  createCanvas(600, 600);
+  innerRadius = min(width, height) * 0.35;
+  outerRadius = min(width, height) * 1;
+  
+  for (let i = 0; i < totalPoints; i++) {
+    let angle = map(i, 0, totalPoints, 0, TWO_PI);
+    let x = innerRadius * cos(angle);
+    let y = innerRadius * sin(angle);
+    innerPoints.push(createVector(x, y));
+    
+    let outerX = outerRadius * cos(angle);
+    let outerY = outerRadius * sin(angle);
+    outerPoints.push(createVector(outerX, outerY));
+  }
+}
+
+function draw() {
+  background(255, 200, 100);
+  
+  translate(width/2, height/2);
+  
+  let m = minute();
+  let minuteRemainder = m % 3; 
+  
+  stroke(255, 0,0);
+  strokeWeight(1);
+  noFill();
+  ellipse(0, 0, innerRadius * 2);
+  
+  for (let i = 0; i < totalPoints; i++) {
+    if (i % 3 === minuteRemainder) {
+      let prevIndex = (i - 1 + totalPoints) % totalPoints;
+      let nextIndex = (i + 1) % totalPoints; 
+      
+      fill(0,0,0); 
+      stroke(0,0,0); 
+      strokeWeight(1.5);
+      
+      beginShape();
+      vertex(innerPoints[i].x, innerPoints[i].y); 
+      vertex(outerPoints[prevIndex].x, outerPoints[prevIndex].y); 
+      vertex(outerPoints[nextIndex].x, outerPoints[nextIndex].y); 
+      endShape(CLOSE);
+    }
+  }
+  
+
+  let s = second();
+  strokeWeight(1.5);
+  stroke(255, 0,0); 
+  
+  for (let i = 0; i < totalPoints; i += 3) {
+    let targetIndex = (i + s) % totalPoints;
+    line(
+      innerPoints[i].x, innerPoints[i].y,
+      innerPoints[targetIndex].x, innerPoints[targetIndex].y
+    );
+  }
+}
+
+  </script>
+  </body>
+</html>      
