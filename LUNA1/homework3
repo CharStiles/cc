@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+  
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+
+//I was finding the code which draws the falling balls but I can't find where it is.
+
+let needsToBeFall=true
+let world;
+let boundaries=[];
+
+function setup() {
+  createCanvas(400, 400);
+ 
+
+  
+}
+
+function polarToCartesian(radius, degrees) {
+  const radians = degrees * (Math.PI / 180);
+  return {
+    x: radius * Math.cos(radians),
+    y: radius * Math.sin(radians)
+  };
+}
+
+
+function draw() {
+  
+  let timeStep=1.0/30;
+  //worldStep(timeStep,10,10)
+  
+  if(second()==0&&needsToBeFall){
+    
+    needsToBeFall=false;
+  }
+  else if(second()>1){
+    needsToBeFall=true
+  }
+  console.log(second())
+   for (let i = 0; i < boundaries.length; i++) {
+    boundaries[i].display();
+  }
+  
+  var c = color( (second()/60.) * 256,(minute()/60.) * 256, (hour()/60.) * 256)
+  
+  background(c);
+  
+  translate(width/2, height/2); // Move origin to center
+
+  for(var i = 0 ; i < 100; i++){
+    
+    var pos;
+    if( (i/100) - (second()/60) < 0.005 &&  (i/100) -(second()/60) > -0.005 ){
+      pos = {x:0,y:0};
+    }
+    else{
+       pos = polarToCartesian(hour()*3, i/100 * 360);
+    }
+    circle(pos.x,pos.y, 50);
+
+  }
+  text("I was finding the code which draws the falling balls",-100,-100)
+   text("but I can't find where it is",-100,100)
+  text("so I just simply copy the codes down soryyyyyy",-100,150)
+  
+}
 
