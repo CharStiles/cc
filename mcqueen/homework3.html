@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.0.3/lib/p5.js"></script>
+    
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+  //PointsText amebahead July 16, 2025
+let font;
+let spots = [];
+var lList = [[],[]]
+var isOrigin = false;
+var totalnum = 0
+
+var hashour = true
+
+async function setup() {
+	createCanvas(windowWidth, windowHeight);
+	textSize(350);
+	textAlign(CENTER);
+    let wid
+    for (j = 10; j<=windowHeight-3;j+=Math.floor(windowHeight/30)){
+      for (i = 3; i<=windowWidth-30;i+=Math.floor(windowWidth/30)){
+        spot = new Spot(i,j)
+        lList[0].push([i,j])
+        spots.push(spot)
+        totalnum+=1
+      }
+      
+    }
+	
+	font = await loadFont('https://cdn.jsdelivr.net/gh/fonts-archive/NanumGothic/NanumGothicLight.ttf');
+	let points = await font.textToPoints(hour().toString(), windowWidth / 2, windowHeight / 3*2, { sampleFactor: 0.075 });
+	
+	for (let p of points) {
+		let spot = new Spot(p.x, p.y);
+		spots.push(spot);
+        lList[1].push([p.x,p.y])
+	}
+  
+
+	
+}
+
+async function draw() {
+	background(0);
+    let cnt = 0
+    let curf = 0
+    let smcnt = 0
+    let sz = (Math.floor((windowHeight-3)/Math.floor(windowHeight/30)*0.5))
+    for (j = Math.floor(10+sz/2); j<=windowHeight-3;j+=Math.floor(windowHeight/30)){
+        
+        textSize(sz);
+	    textAlign(CENTER);  
+        fill(0)
+        text(Math.floor(j / windowHeight*60).toString(),windowWidth-30+sz, j)
+    }
+    if (minute() == 0 && hashour){
+      
+        lList[1] = []
+	    let points = await font.textToPoints(hour().toString(), windowWidth / 2, windowHeight / 3*2, { sampleFactor: 0.1 });
+	
+	    for (let p of points) {
+            lList[1].push([p.x,p.y])
+	    }
+    hashour = false
+    }
+    if (minute() == 3 && !hashour){
+        hashour = true
+    }
+	for (let s of spots) {
+        if (smcnt>=lList[curf].length){
+            smcnt = 0
+            curf+=1
+        }
+      
+        let origin = lList[curf][smcnt]
+		if (isOrigin) {
+			s.originalize(origin);
+		} else {
+			s.diffuse();
+		}
+		
+		s.checkEdges();
+		s.run();
+        let c1
+        let c2
+        let c3
+        if (cnt<=(second()+minute()*60)/3600*totalnum){
+            c1 = 0
+            c2 = 255
+            c3 = 255
+        }else if (cnt<=totalnum){
+            c1 = 255
+            c2 = 255
+            c3 = 255
+        }else{
+            if (isOrigin){
+                c1 = 255
+                c2 = 255
+                c3 = 255
+            }else{
+                c1 = 255
+                c2 = 255
+                c3 = 255
+            }
+
+        }
+        
+		s.show(c1,c2,c3);
+        cnt+=1
+        smcnt +=1
+	}
+}
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight);
+}
+
+function mouseClicked() {
+	isOrigin = !isOrigin;
+}
+
+class Spot {
+	constructor(x, y) {
+		this.origin = createVector(x, y);
+		this.pos = createVector(random(0, windowWidth), random(0, windowHeight));
+		this.acc = createVector(0, 0);
+		this.vel = createVector(0, 0);
+		this.maxforce = 8.0;
+        this.state = 0
+	}
+	
+	// F = ma
+	applyForce(force) {
+		let limited = force.limit(this.maxforce);
+		this.acc.add(limited);
+	}
+	
+	checkEdges() {
+		// UpSdie
+		if (this.pos.y <= 0) {
+            this.pos.y = 0
+			this.vel.y *= -1;
+		}
+		// DownSide
+		else if (this.pos.y >= windowHeight) {
+            this.pos.y =  windowHeight
+			this.vel.y *= -1;
+		}
+		// LeftSide
+		else if (this.pos.x <= 0) {
+            this.pos.x = 0
+			this.vel.x *= -1;
+		}
+		// RightSide
+		else if (this.pos.x >= windowWidth) {
+            this.pos.x =  windowWidth
+			this.vel.x *= -1;
+		}
+	}
+	
+	run() {
+		this.vel.add(this.acc);
+		this.pos.add(this.vel);
+		this.acc.mult(0);
+	}
+	
+	diffuse() {
+		let randomed = createVector(random(-0.1, 0.1), random(-0.1, 0.1));
+		this.applyForce(randomed);
+	}
+	
+	originalize(origin) {
+        let sorigin = createVector(origin[0],origin[1])
+		let desired = p5.Vector.sub(sorigin, this.pos);
+		let d = desired.mag();
+		if (d < 100) {
+			let m = map(d, 0, 100, 0, this.maxforce);
+			desired.setMag(m);
+		} else {
+			desired.setMag(this.maxforce);
+		}
+		
+		let steer = p5.Vector.sub(desired, this.vel);
+		this.applyForce(steer);
+	}
+	changecol(c){
+        this.col = c
+    }
+	show(c1,c2,c3) {
+		stroke(c1,c2,c3);
+		strokeWeight(5);
+		point(this.pos.x, this.pos.y);
+	}
+}
+  </script>
+  
+
+</body></html>
