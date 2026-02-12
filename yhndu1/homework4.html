@@ -92,19 +92,14 @@ var vert = `
 //YOUR CODE GOES HERE IN BETWEEN THE tick MARKS
 var frag = `
 
+
 #ifdef GL_ES
 precision mediump float;
 #endif
 
 uniform vec2 u_resolution;
-uniform float u_time;
-uniform float u_vol;
+uniform float u_time; // millis()
 
-// i copied and pasted these functions from the sticker sheet
-
-// As t runs from 0 to 1 (our normalized palette index or domain), 
-//the cosine oscilates c times with a phase of d. 
-//The result is scaled and biased by a and b to meet the desired constrast and brightness.
 // http://www.iquilezles.org/www/articles/palettes/palettes.htm 
 // to see this function graphed out go to: https://www.desmos.com/calculator/rz7abjujdj
 vec3 cosPalette( float t , vec3 brightness, vec3 contrast, vec3 osc, vec3 phase)
@@ -114,48 +109,45 @@ vec3 cosPalette( float t , vec3 brightness, vec3 contrast, vec3 osc, vec3 phase)
 }
 
 
+
+float sdCircle( vec2 p, float r )
+{
+  return length(p) - r;
+}
+
+
 void main() {
-    
+
     vec2 pos = ((gl_FragCoord.xy/u_resolution) - 0.5)*2.0; // origin is in center
-    
-    float freq = abs(pos.x*5.);
-    pos.x = sin((pos.y * freq)+ cos(pos.y*freq) );
-    
     // who remembers SOH CAH TOA ?
     // tan, given an angle will return the ratio
     // so if we only have the ratio of position
     // we use atan to get the angle
-    float angle = atan(pos.y/abs(pos.x+0.01));
-    // we take the absolute value of x and add a small number to avoid
-    // dividing by zero which is undefined behavior
+  
+    float angle = atan(pos.y, pos.x);
+  	float r = sin(angle + u_time/10.);
+  
+  	float g = sin(length(pos * 10.)-u_time);
+  
+  	float b = sin(sin(angle * 10.) + length(pos * 10. + u_time) );
+
+
+  
+  
+  
+    vec4 color = vec4(r,g,b,1);
     
-    float r = sin(angle + u_time); 
-    // sin returns a number from -1 to 1, and colors are from 0 to 1, so thats 
-    // why you only see red on the screen half the time. the angle goes around
-    // the screen, adding time moves it clockwise
-
-	float ringFrequency = 5.; // making this number bigger will increase frequency
-	float g = cos(length(pos*ringFrequency ) - u_time); 
-	// the distance (aka length) from the center put in a cos, time moves the 
-	// circles in. 
-	
-	float b = cos(angle+ cos(length(pos*15.)) + u_vol ); 
-	// this combines what we learned in the red and green channels
-	// angle is going through a cos and so is the length, so we see the 
-	// blue channel oscillating in both dimensions the polar coordinates give us
-	// here the music effects the place where the phase of the cosine starts
-	    // please play around with these numbers to get a better palette
-    vec3 brightness = vec3(0.5);
-    vec3 contrast = vec3(0.15,0.1,0.3);
-    // the numbers that divide time are pretty arbitrary, as long as they are not the same and are somewhere between 10-100 id say it gives the desired effect
-    vec3 osc = vec3(r,cos(u_time/20.),cos(u_time/31.));
-    vec3 phase = vec3(b,0.5,0.1);
-	vec3 color = cosPalette(g, brightness, contrast, osc, phase);
-
-    
-    gl_FragColor = vec4(color,1.);
-
-  }`;
+  	vec3 brightness= vec3(0.92,0.902,0.91) - 0.2;
+  vec3 contrast = vec3 (.1,.1,.1);
+  vec3 osc = vec3(0.2,0.205,0.201);
+  vec3 phase =vec3(0.23,0.22,0.21);
+  
+  vec3 cosColor = cosPalette(r+b, brightness, contrast, osc,phase) - sdCircle(pos,0.2);
+  
+  
+  
+    gl_FragColor = vec4(cosColor,1.);
+}`;
 
 
     </script>
