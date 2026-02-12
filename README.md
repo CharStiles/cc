@@ -1,3 +1,37 @@
+**Day 4**
+SHADER DAY!!!
+
+
+Resources:
+* [🧰 Here you can find the sticker sheet](https://gist.github.com/CharStiles/787c2e3e898b68f7e2ca1acbdc0262b5)
+* [🌈 Here is Inigo Quilez's page for 2D SDF](https://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm)
+* [🧮 Here is an online graphing calculator, very helpful when writing shaders]( https://www.desmos.com/calculator)
+* [🎨 Here is the cosPalette function graphed out](https://www.desmos.com/calculator/18rq4ybrru)
+* 🌈 the shader we wrote together but in [TouchDesigner]()
+
+Next Steps for shader programming:
+
+💜 Join a community!
+Shader.Zone is a safe and inclusive discord to talk about shaders, tools, generative art, and more! Started by my friends Conner Bell and Patricio Gonzalez Vivo: https://shader.zone/
+
+💜 p5js shader examples!
+Aman Ferris made [a collection of p5.js shaders](https://github.com/aferriss/p5jsShaderExamples/)
+
+💚 Learn the maths from The Book of Shaders
+If you haven't looked at this already, look through it! It's wonderfully paced and has a lot of versatile useful information: https://thebookofshaders.com/
+
+🔢 More online math
+http://immersivemath.com/ila/index.html
+
+🌟 Learn more about GLSL shader functions:
+https://www.shaderific.com/glsl-functions
+
+📽 Learn more math that is relevant from an awesome YouTube channel
+https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw
+
+📈 Some easing functions if sin & cos get boring 🙂
+https://easings.net/en
+
 **Day 3**
 
 In class we went over:
