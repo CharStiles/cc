@@ -1,6 +1,9 @@
 **Day 4**
+
+
 SHADER DAY!!!
 
+[Shader Place!](https://charstiles.github.io/shaderplace/) The tool we are going to be using to test our shaders and write it together
 
 Resources:
 * [🧰 Here you can find the sticker sheet](https://gist.github.com/CharStiles/787c2e3e898b68f7e2ca1acbdc0262b5)
