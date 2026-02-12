@@ -1,0 +1,76 @@
+
+let canvasWidth = 800;
+let canvasHeight = 800;
+
+function setup() {
+  createCanvas(canvasWidth, canvasHeight);
+ 
+  noLoop();
+}
+
+function draw() {
+
+  let u_time = millis() / 1000;
+  
+  
+  loadPixels();
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      
+      let posX = (x / width) * 2 - 1;
+      let posY = (y / height) * 2 - 1;
+     
+      posX *= width / height;
+      
+   
+      let angle = atan(posY, posX); 
+      let dist = sqrt(posX * posX + posY * posY);
+    
+      let dist2 = dist * 6.0;
+      let dist3 = dist * 15.0;
+    
+      let angle2 = angle * 5.0;
+      let angle3 = angle * 8.0;
+      
+    
+      let r = sin(angle * 3.0 + u_time * 1.2 + cos(dist2 - u_time * 0.5)) * 0.6 + 0.4;
+      
+      let g = cos(dist * 8.0 - u_time * 0.8 + sin(angle3 + u_time * 0.7)) * 0.6 + 0.4;
+    
+      let b = sin(angle2 * 2.0 + cos(dist3 * 1.2 + u_time * 0.6) + sin(u_time * 0.3)) * 0.6 + 0.4;
+      
+     
+      let hueShift = sin(u_time * 0.2) * 0.2;
+      r = (r + hueShift + 1.0) % 1.0;
+      g = (g + hueShift * 0.8 + 1.0) % 1.0;
+      b = (b + hueShift * 0.5 + 1.0) % 1.0;
+     
+      
+    
+      r = pow(r, 1.2); 
+      g = pow(g, 1.2);
+      b = pow(b, 1.2);
+      
+      
+      let red = floor(r * 255);
+      let green = floor(g * 255);
+      let blue = floor(b * 255);
+      
+  
+      let pixelIndex = (y * width + x) * 4;
+      pixels[pixelIndex] = red;
+      pixels[pixelIndex + 1] = green;
+      pixels[pixelIndex + 2] = blue;
+      pixels[pixelIndex + 3] = 255; 
+    }
+  }
+  updatePixels();
+  
+
+  requestAnimationFrame(draw);
+}
+
+
+function windowResized() {
+  resizeCanvas(canvasWidth, canvasHeight);
+}
