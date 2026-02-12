@@ -3,6 +3,11 @@
 
 SHADER DAY!!!
 
+homework:
+
+Explore one of the resources provided then edit homework4.html with your shader you wrote using what you learned from one of the resources! 
+
+
 [Shader Place!](https://charstiles.github.io/shaderplace/) The tool we are going to be using to test our shaders and write it together
 
 Shader Checkpoints
