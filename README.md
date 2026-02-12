@@ -21,15 +21,12 @@ https://gist.github.com/CharStiles/3d8e47f6d50362452838e9b1833899a4
 Checkpoint 2
 https://gist.github.com/CharStiles/9ea8ac97fa6792689b37394cbd898c45
 
-Homework:
-Create a shader-based visual piece using the provided homework4.html template. Experiment with the shader code, modify the cosPalette parameters, and explore different visual effects using GLSL shaders.
-
 Resources:
-* [🧰 Here you can find the sticker sheet](https://gist.github.com/CharStiles/787c2e3e898b68f7e2ca1acbdc0262b5)
-* [🌈 Here is Inigo Quilez's page for 2D SDF](https://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm)
+* [🧰 Here you can find the sticker sheet](https://gist.github.com/CharStiles/e6fec016967c6c8fd648aa4b6c0055cc)
+* [🌈 Here is Inigo Quilez's page for 2D SDF](https://iquilezles.org/articles/distfunctions2d/)
 * [🧮 Here is an online graphing calculator, very helpful when writing shaders]( https://www.desmos.com/calculator)
 * [🎨 Here is the cosPalette function graphed out](https://www.desmos.com/calculator/18rq4ybrru)
-* 🌈 the shader we wrote together but in [TouchDesigner]()
+* 🌈 the shader we wrote together but in [TouchDesigner](https://drive.google.com/drive/folders/1u2_IrBhG5SM6gyy4VYdy73VvFQxejT9Y?usp=drive_link)
 
 Next Steps for shader programming:
 
