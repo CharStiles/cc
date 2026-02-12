@@ -5,6 +5,18 @@ SHADER DAY!!!
 
 [Shader Place!](https://charstiles.github.io/shaderplace/) The tool we are going to be using to test our shaders and write it together
 
+Shader Checkpoints
+
+Checkpoint 0
+https://gist.github.com/CharStiles/5934425b602b1158761118be67abfd83
+
+Checkpoint 1
+https://gist.github.com/CharStiles/3d8e47f6d50362452838e9b1833899a4
+
+Checkpoint 2
+https://gist.github.com/CharStiles/9ea8ac97fa6792689b37394cbd898c45
+
+
 Resources:
 * [🧰 Here you can find the sticker sheet](https://gist.github.com/CharStiles/787c2e3e898b68f7e2ca1acbdc0262b5)
 * [🌈 Here is Inigo Quilez's page for 2D SDF](https://www.iquilezles.org/www/articles/distfunctions2d/distfunctions2d.htm)
