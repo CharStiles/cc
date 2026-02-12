@@ -43,6 +43,7 @@ In class we went over:
 * Dan Shiffman's [slitscan](https://editor.p5js.org/Char/sketches/6_PHNga52)
 * Dan Shiffman's youtube [channel](https://www.youtube.com/@TheCodingTrain)
 * fractal [tree clock sketch](https://editor.p5js.org/Char/sketches/6uJSTGSet)
+* ball falling [physics clock](https://editor.p5js.org/Char/sketches/Z-tys5tM4)
 
 
 homework:
