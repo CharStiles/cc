@@ -1,6 +1,8 @@
 **Day 4**
 SHADER DAY!!!
 
+Homework:
+Create a shader-based visual piece using the provided homework4.html template. Experiment with the shader code, modify the cosPalette parameters, and explore different visual effects using GLSL shaders.
 
 Resources:
 * [🧰 Here you can find the sticker sheet](https://gist.github.com/CharStiles/787c2e3e898b68f7e2ca1acbdc0262b5)
