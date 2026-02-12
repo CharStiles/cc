@@ -17,39 +17,9 @@ let video;
 
 let program, shadertime;
 
-function setup() {
-  noCursor();
-  createCanvas(400, 400, WEBGL);
-    program = createShader(vert, frag);
-  shaderTime =0.;
- // fullscreen(true);
-}
+var isClicked
 
 
-function draw() {
-  noCursor();
-  var right = []
-  var left = []
-  background(255,255)
-    translate(-width/2.,-height/2.)
-    shader(program);
-  shaderTime+= 0.005;
-     program.setUniform('mx', mouseX);
-   program.setUniform('my',mouseY);
-  
-   program.setUniform('u_resolution', [width, height]);
-
-    program.setUniform('u_time', shaderTime);
-    program.setUniform('min', float((minute()/1.5) + 10 ));
-    program.setUniform('hour', float(hour() ));
-  program.setUniform("uTexture", cursor);
-
-   // rect gives us some geometry on the screen
-   rect(0,0,width, height);
-  
-  shaderTime++;
-
-}
 
 function mouseClicked(){
   isClicked = !isClicked;
@@ -57,6 +27,7 @@ function mouseClicked(){
 }
 
 var vert = `
+
 #ifdef GL_ES
       precision highp float;
       precision highp int;
@@ -68,11 +39,13 @@ var vert = `
     attribute vec2 aTexCoord;
     attribute vec4 aVertexColor;
 
+
     // attributes, out
     varying vec3 var_vertPos;
     varying vec4 var_vertCol;
     varying vec3 var_vertNormal;
     varying vec2 var_vertTexCoord;
+    varying vec2 vUv;
 
     // matrices
     uniform mat4 uModelViewMatrix;
@@ -80,82 +53,96 @@ var vert = `
     //uniform mat3 uNormalMatrix;
 
     void main() {
-      gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aPosition, 1.0);
+      gl_Position = vec4(aPosition, 1.0);
+      vUv = (aPosition.xy + vec2(1.0)) * 0.5;
+    
 
-      // just passing things through
       // var_vertPos      = aPosition;
       // var_vertCol      = aVertexColor;
       // var_vertNormal   = aNormal;
       // var_vertTexCoord = aTexCoord;
+
     }
+    // Vertex shader
+precision mediump float;
+
+
+
 `;
+
 //YOUR CODE GOES HERE IN BETWEEN THE tick MARKS
 var frag = `
-
-#ifdef GL_ES
+// Fragment shader
 precision mediump float;
-#endif
 
 uniform vec2 u_resolution;
 uniform float u_time;
-uniform float u_vol;
+uniform int u_numBubbles;
 
-// i copied and pasted these functions from the sticker sheet
+varying vec2 vUv;
 
-// As t runs from 0 to 1 (our normalized palette index or domain), 
-//the cosine oscilates c times with a phase of d. 
-//The result is scaled and biased by a and b to meet the desired constrast and brightness.
-// http://www.iquilezles.org/www/articles/palettes/palettes.htm 
-// to see this function graphed out go to: https://www.desmos.com/calculator/rz7abjujdj
-vec3 cosPalette( float t , vec3 brightness, vec3 contrast, vec3 osc, vec3 phase)
-{
 
-    return brightness + contrast*cos( 6.28318*(osc*t+phase) );
+float hash(vec2 p) {
+  return fract(sin(dot(p, vec2(127.1, 311.7))) * 129412.43);
 }
 
-
 void main() {
-    
-    vec2 pos = ((gl_FragCoord.xy/u_resolution) - 0.5)*2.0; // origin is in center
-    
-    float freq = abs(pos.x*5.);
-    pos.x = sin((pos.y * freq)+ cos(pos.y*freq) );
-    
-    // who remembers SOH CAH TOA ?
-    // tan, given an angle will return the ratio
-    // so if we only have the ratio of position
-    // we use atan to get the angle
-    float angle = atan(pos.y/abs(pos.x+0.01));
-    // we take the absolute value of x and add a small number to avoid
-    // dividing by zero which is undefined behavior
-    
-    float r = sin(angle + u_time); 
-    // sin returns a number from -1 to 1, and colors are from 0 to 1, so thats 
-    // why you only see red on the screen half the time. the angle goes around
-    // the screen, adding time moves it clockwise
+  vec2 uv = vUv;
+  vec3 color = vec3(0.0);
 
-	float ringFrequency = 5.; // making this number bigger will increase frequency
-	float g = cos(length(pos*ringFrequency ) - u_time); 
-	// the distance (aka length) from the center put in a cos, time moves the 
-	// circles in. 
-	
-	float b = cos(angle+ cos(length(pos*15.)) + u_vol ); 
-	// this combines what we learned in the red and green channels
-	// angle is going through a cos and so is the length, so we see the 
-	// blue channel oscillating in both dimensions the polar coordinates give us
-	// here the music effects the place where the phase of the cosine starts
-	    // please play around with these numbers to get a better palette
-    vec3 brightness = vec3(0.5);
-    vec3 contrast = vec3(0.15,0.1,0.3);
-    // the numbers that divide time are pretty arbitrary, as long as they are not the same and are somewhere between 10-100 id say it gives the desired effect
-    vec3 osc = vec3(r,cos(u_time/20.),cos(u_time/31.));
-    vec3 phase = vec3(b,0.5,0.1);
-	vec3 color = cosPalette(g, brightness, contrast, osc, phase);
+  vec3 bubbleColor = vec3(0.5, 0.9, 1.0);
 
-    
-    gl_FragColor = vec4(color,1.);
+  for (int i = 0; i < 20; i++) {
+    if (i >= u_numBubbles) break;
+    float fi = float(i);
 
-  }`;
+    float s = hash(vec2(fi, 0.0));
+    float x = mix(0.08, 0.92, hash(vec2(fi, 1.0))); 
+    float y0 = mix(0.15, 0.85, hash(vec2(fi, 2.0))); 
+    float v = 0.2 + fract(s * 7.3) * 0.25;          
+
+    float cy = fract(y0 + u_time * v);
+
+    float drift = 0.25 * sin(u_time * (0.4 + fi * 0.1));
+    float cx = fract(x + drift);
+
+    vec2 center = vec2(cx, cy);
+
+    float r = 0.02 + 0.02 * hash(vec2(fi, 3.0));
+
+    float d = distance(uv, center);
+
+    float sigma = r * 0.65;
+    float brightness = exp(- (d * d) / (2.0 * sigma * sigma));
+
+    color += bubbleColor * brightness;
+  }
+
+  color = clamp(color, 0.0, 1.0);
+  gl_FragColor = vec4(color, 1.0);
+}
+`;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight, WEBGL);
+  noStroke();
+
+  theShader = createShader(vert, frag);
+  shader(theShader);
+}
+
+function draw() {
+  background(0);
+  noCursor();
+  background(255,255)
+
+  theShader.setUniform('u_time', millis() / 1000.0);
+  theShader.setUniform('u_resolution', [width, height]);
+  theShader.setUniform('u_numBubbles', 30); 
+
+  rect(0,0,width, height);
+}
+
 
 
     </script>
