@@ -1,5 +1,20 @@
 **Day 4**
+
+
 SHADER DAY!!!
+
+[Shader Place!](https://charstiles.github.io/shaderplace/) The tool we are going to be using to test our shaders and write it together
+
+Shader Checkpoints
+
+Checkpoint 0
+https://gist.github.com/CharStiles/5934425b602b1158761118be67abfd83
+
+Checkpoint 1
+https://gist.github.com/CharStiles/3d8e47f6d50362452838e9b1833899a4
+
+Checkpoint 2
+https://gist.github.com/CharStiles/9ea8ac97fa6792689b37394cbd898c45
 
 Homework:
 Create a shader-based visual piece using the provided homework4.html template. Experiment with the shader code, modify the cosPalette parameters, and explore different visual effects using GLSL shaders.
@@ -45,6 +60,8 @@ In class we went over:
 * Dan Shiffman's [slitscan](https://editor.p5js.org/Char/sketches/6_PHNga52)
 * Dan Shiffman's youtube [channel](https://www.youtube.com/@TheCodingTrain)
 * fractal [tree clock sketch](https://editor.p5js.org/Char/sketches/6uJSTGSet)
+* ball falling [physics clock](https://editor.p5js.org/Char/sketches/Z-tys5tM4)
+* [Radiating rays](https://editor.p5js.org/Char/sketches/lFTfIwZ9-)
 
 
 homework:
