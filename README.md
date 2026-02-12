@@ -1,6 +1,6 @@
 **Day 4**
 SHADER DAY!!!
-we will be using 
+
 
 Resources:
 * [🧰 Here you can find the sticker sheet](https://gist.github.com/CharStiles/787c2e3e898b68f7e2ca1acbdc0262b5)
