@@ -98,56 +98,35 @@ precision mediump float;
 #endif
 
 uniform vec2 u_resolution;
-uniform float u_time; // millis()
+uniform float u_time;
+uniform float u_vol;
 
-// http://www.iquilezles.org/www/articles/palettes/palettes.htm 
-// to see this function graphed out go to: https://www.desmos.com/calculator/rz7abjujdj
-vec3 cosPalette( float t , vec3 brightness, vec3 contrast, vec3 osc, vec3 phase)
+// main is a reserved function that is going to be called first
+void main(void)
 {
+    vec2 normCoord = gl_FragCoord.xy/u_resolution;
+    
+    float time = u_time/9.0; //slow down time
 
-    return brightness + contrast*cos( 6.28318*(osc*t+phase) );
-}
-
-
-
-float sdCircle( vec2 p, float r )
-{
-  return length(p) - r;
-}
-
-
-void main() {
-
-    vec2 pos = ((gl_FragCoord.xy/u_resolution) - 0.5)*2.0; // origin is in center
-    // who remembers SOH CAH TOA ?
-    // tan, given an angle will return the ratio
-    // so if we only have the ratio of position
-    // we use atan to get the angle
-  
-    float angle = atan(pos.y, pos.x);
-  	float r = sin(angle + u_time/10.);
-  
-  	float g = sin(length(pos * 10.)-u_time);
-  
-  	float b = sin(sin(angle * 10.) + length(pos * 10. + u_time) );
-
-
-  
-  
-  
+    vec2 uv = -1. + 2. * normCoord;
+    float r = sin(time + uv.x); 
+    // x is left to right, why we see red moving from right to left think about us as a camera moving around
+    // sin returns a number from -1 to 1, and colors are from 0 to 1, so it clips to no red half the time
+	
+	float g = sin(-time + uv.y * 20.); // higher frequency green stripes
+	
+	float b = mod(uv.x / uv.y,1.0);
+	// when x is eual to y the colors will be brighter, mod repeats the space
+	// mod is like a sawtooth function
+	
     vec4 color = vec4(r,g,b,1);
     
-  	vec3 brightness= vec3(0.92,0.902,0.91) - 0.2;
-  vec3 contrast = vec3 (.1,.1,.1);
-  vec3 osc = vec3(0.2,0.205,0.201);
-  vec3 phase =vec3(0.23,0.22,0.21);
-  
-  vec3 cosColor = cosPalette(r+b, brightness, contrast, osc,phase) - sdCircle(pos,0.2);
   
   
-  
-    gl_FragColor = vec4(cosColor,1.);
-}`;
+  gl_FragColor = color.bgra;
+}
+
+`;
 
 
     </script>
