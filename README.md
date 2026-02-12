@@ -44,6 +44,7 @@ In class we went over:
 * Dan Shiffman's youtube [channel](https://www.youtube.com/@TheCodingTrain)
 * fractal [tree clock sketch](https://editor.p5js.org/Char/sketches/6uJSTGSet)
 * ball falling [physics clock](https://editor.p5js.org/Char/sketches/Z-tys5tM4)
+* [Radiating rays](https://editor.p5js.org/Char/sketches/lFTfIwZ9-)
 
 
 homework:
