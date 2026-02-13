@@ -81,7 +81,7 @@ If you haven't looked at this already, look through it! It's wonderfully paced a
 http://immersivemath.com/ila/index.html
 
 🌟 Learn more about GLSL shader functions:
-https://www.shaderific.com/glsl-functions
+[on shaderific](https://shaderific.com/glsl.html)
 
 📽 Learn more math that is relevant from an awesome YouTube channel
 https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw
