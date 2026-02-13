@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.0.3/lib/p5.js"></script>
+    
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+let step = 20;   
+let palette;                  
+let scale = 0.0012;           
+let zoff = 0;                 
+
+function setup() {
+  createCanvas(800, 600);
+  background(0);
+  noFill();
+  
+  noiseDetail(4, 0.5);
+
+
+}
+
+function draw() {
+ 
+  background(0, 0, 15, 10);
+  zoff += 0.003;
+  
+  stroke(color(120, 200, 255, 180)); 
+  strokeWeight(1.2);
+  renderContour(0);
+}
+
+function renderContour(threshold) {
+  for (let y = 0; y <= height - step; y += step) {
+    for (let x = 0; x <= width - step; x += step) {
+
+      let v0 = sample(x, y);                 // top-left
+      let v1 = sample(x + step, y);          // top-right
+      let v2 = sample(x, y + step);          // bottom-left
+      let v3 = sample(x + step, y + step);   // bottom-right
+
+      let pts = [];
+
+      if (crosses(v0, v2, threshold)) {
+        let s = v0 / (v0 - v2); 
+        pts.push({ x: x, y: y + s * step });
+      }
+
+      if (crosses(v1, v3, threshold)) {
+        let s = v1 / (v1 - v3);
+        pts.push({ x: x + step, y: y + s * step });
+      }
+
+      if (crosses(v2, v3, threshold)) {
+        let s = v2 / (v2 - v3);
+        pts.push({ x: x + s * step, y: y + step });
+      }
+
+      if (crosses(v0, v1, threshold)) {
+        let s = v0 / (v0 - v1);
+        pts.push({ x: x + s * step, y: y });
+      }
+
+
+      for (let i = 0; i + 1 < pts.length; i += 1) {
+        let a = pts[i];
+        let b = pts[i + 1];
+        line(a.x, a.y, b.x, b.y);
+      }
+    }
+  }
+}
+function crosses(a, b, t) {
+  return (a > t) != (b > t);
+}
+
+
+function sample(x, y) {
+  let nx = x * scale;
+  let ny = y * scale;
+  let nz = zoff;
+  let n = noise(nx, ny, nz);
+  return n - 0.5; 
+}
+</script>
+  
+
+</body></html>
