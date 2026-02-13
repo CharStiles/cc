@@ -7,9 +7,10 @@ What we looked at in class:
 * [ToplapWiki](https://github.com/toplap/awesome-livecoding)
 * [song we wrote](https://gist.github.com/CharStiles/56930575288844e82863a6358b15b3fa)
 
-Samples for gathering
-* [DJ_DAVE](https://github.com/algorave-dave/samples)
-* [lil data](https://github.com/lil-data/dj_dave-array_remix/tree/main/snd)
+Resources
+* Book [livecoding manual](https://livecodingbook.toplap.org/)
+* [samples from DJ_DAVE](https://github.com/algorave-dave/samples)
+* [samples from lil data](https://github.com/lil-data/dj_dave-array_remix/tree/main/snd)
 
 Some Livecode Artists
 * Switch Angel
