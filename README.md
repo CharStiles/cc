@@ -1,3 +1,25 @@
+**Day 5**
+
+Review of what we learned then a little music at the end!
+
+What we looked at in class:
+* [Toplap](https://blog.toplap.org/)
+* [ToplapWiki](https://github.com/toplap/awesome-livecoding)
+* [song we wrote](https://gist.github.com/CharStiles/56930575288844e82863a6358b15b3fa)
+
+Resources
+* Book [livecoding manual](https://livecodingbook.toplap.org/)
+* [samples from DJ_DAVE](https://github.com/algorave-dave/samples)
+* [samples from lil data](https://github.com/lil-data/dj_dave-array_remix/tree/main/snd)
+
+Some Livecode Artists
+* Switch Angel: here is her [twitch](https://www.twitch.tv/switchang3l) This is her [youtube where she has more tutorials on strudel.cc](https://www.youtube.com/@Switch-Angel)
+* [alsoknownasrox](https://alsoknownasrox.com/)
+* [c_robo](https://c-robo.bandcamp.com/album/iterations-live-set-11-28-2025-at-grey-space-in-the-middle-edited-and-chopped-into-tracks)
+* [DJ_DAVE](https://djdave.xyz/)
+* [Yaxu](https://yaxu.org/)
+* So many more!!
+
 **Day 4**
 
 
@@ -27,6 +49,7 @@ Resources:
 * [🧮 Here is an online graphing calculator, very helpful when writing shaders]( https://www.desmos.com/calculator)
 * [🎨 Here is the cosPalette function graphed out](https://www.desmos.com/calculator/18rq4ybrru)
 * 🌈 the shader we wrote together but in [TouchDesigner](https://drive.google.com/drive/folders/1u2_IrBhG5SM6gyy4VYdy73VvFQxejT9Y?usp=drive_link)
+* [Shadertoy tutorial video](https://www.youtube.com/watch?v=u5HAYVHsasc)
 
 Next Steps for shader programming:
 

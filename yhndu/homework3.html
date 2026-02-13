@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
 
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+//tutorial by Patt Vira
+
+let hLength = 60;
+let mLength = 75;
+let sLength = 100;
+
+function setup() {
+  createCanvas(400, 400);
+  angleMode(DEGREES);
+}
+
+function draw() {
+  background(220);
+  let h = hour();
+  let m = minute();
+  let s = second();
+  
+  translate(width/2, height/2);
+  rotate(-90);
+  stroke(0);
+  ellipse(0, 0, 250,250);
+  
+  let hAngle = map(h-12,0,12,0,360);
+  let mAngle = map(m,0,60,0,360);
+  let sAngle = map(s,0,60,0,360);
+  
+  let hx = hLength*cos(hAngle);
+  let hy = hLength*sin(hAngle);
+  let mx = mLength*cos(mAngle);
+  let my = mLength*sin(mAngle);
+  let sx = sLength*cos(sAngle);
+  let sy = sLength*sin(sAngle);
+  
+  strokeWeight(3);
+  stroke(125,0,255);
+  line(0,0,hx,hy);
+  ellipse(hx,hy,20,20);
+  
+  stroke(125,255,0);
+  line(0,0,mx,my);
+  ellipse(mx,my,20,20);
+  
+  stroke(125,255,255);
+  line(0,0,sx,sy);
+  ellipse(sx,sy,20,20);
+}
+      
+    </script>
+  </body>
+</html>
