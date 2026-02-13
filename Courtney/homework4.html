@@ -31,14 +31,14 @@ function draw() {
   var right = []
   var left = []
   background(255,255)
-    translate(-width/2.,-height/2.)
+   translate(-width/2.,-height/2.)
     shader(program);
-  shaderTime+= 0.005;
+    shaderTime+= 0.0001;
      program.setUniform('mx', mouseX);
    program.setUniform('my',mouseY);
   
-   program.setUniform('u_resolution', [width, height]);
-
+   program.setUniform('u_resolution', [width*2., height*2.]);
+ 
     program.setUniform('u_time', shaderTime);
     program.setUniform('min', float((minute()/1.5) + 10 ));
     program.setUniform('hour', float(hour() ));
@@ -129,7 +129,7 @@ void main() {
     // we take the absolute value of x and add a small number to avoid
     // dividing by zero which is undefined behavior
     
-    float r = sin(angle + u_time); 
+    float r = sin(angle + u_time/30.); 
     // sin returns a number from -1 to 1, and colors are from 0 to 1, so thats 
     // why you only see red on the screen half the time. the angle goes around
     // the screen, adding time moves it clockwise
@@ -139,7 +139,7 @@ void main() {
 	// the distance (aka length) from the center put in a cos, time moves the 
 	// circles in. 
 	
-	float b = cos(angle+ cos(length(pos*15.)) + u_vol ); 
+	float b = cos(angle+ cos(length(pos*15.))  ); 
 	// this combines what we learned in the red and green channels
 	// angle is going through a cos and so is the length, so we see the 
 	// blue channel oscillating in both dimensions the polar coordinates give us

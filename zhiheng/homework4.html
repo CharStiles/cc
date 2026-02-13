@@ -33,11 +33,11 @@ function draw() {
   background(255,255)
     translate(-width/2.,-height/2.)
     shader(program);
-  shaderTime+= 0.005;
+  shaderTime+= 0.0001;
      program.setUniform('mx', mouseX);
    program.setUniform('my',mouseY);
   
-   program.setUniform('u_resolution', [width, height]);
+   program.setUniform('u_resolution', [width*2., height*2.]);
 
     program.setUniform('u_time', shaderTime);
     program.setUniform('min', float((minute()/1.5) + 10 ));
