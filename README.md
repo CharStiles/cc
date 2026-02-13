@@ -11,7 +11,7 @@ Homework:
 Catch up on any homeworks you might have missed or refine a existing homework youre excited about!
 
 
-**Day ? **
+**Day ?**
 
 Review of what we learned then a little music at the end!
 
