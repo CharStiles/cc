@@ -1,5 +1,18 @@
 **Day 5**
 
+Review Day!
+
+We went over in class
+* [slit scan clock](https://editor.p5js.org/Char/sketches/GJSZwtH7l)
+
+
+Homework:
+
+Catch up on any homeworks you might have missed or refine a existing homework youre excited about!
+
+
+**Day ? **
+
 Review of what we learned then a little music at the end!
 
 [For making music this is the tool we are using! Its called strudel](https://strudel.cc/)
