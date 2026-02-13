@@ -49,6 +49,7 @@ Resources:
 * [🧮 Here is an online graphing calculator, very helpful when writing shaders]( https://www.desmos.com/calculator)
 * [🎨 Here is the cosPalette function graphed out](https://www.desmos.com/calculator/18rq4ybrru)
 * 🌈 the shader we wrote together but in [TouchDesigner](https://drive.google.com/drive/folders/1u2_IrBhG5SM6gyy4VYdy73VvFQxejT9Y?usp=drive_link)
+* [Shadertoy tutorial video](https://www.youtube.com/watch?v=u5HAYVHsasc)
 
 Next Steps for shader programming:
 
