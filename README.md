@@ -1,3 +1,24 @@
+**Day 5**
+
+Review of what we learned then a little music at the end!
+
+What we looked at in class:
+* [Toplap](https://blog.toplap.org/)
+* [ToplapWiki](https://github.com/toplap/awesome-livecoding)
+* [song we wrote](https://gist.github.com/CharStiles/56930575288844e82863a6358b15b3fa)
+
+Samples for gathering
+* [DJ_DAVE](https://github.com/algorave-dave/samples)
+* [lil data](https://github.com/lil-data/dj_dave-array_remix/tree/main/snd)
+
+Some Livecode Artists
+* Switch Angel
+  ** here is her [twitch](https://www.twitch.tv/switchang3l)
+  ** This is her [youtube where she has more tutorials on strudel.cc](https://www.youtube.com/@Switch-Angel)
+* [alsoknownasrox](https://alsoknownasrox.com/)
+* [c_robo](https://c-robo.bandcamp.com/album/iterations-live-set-11-28-2025-at-grey-space-in-the-middle-edited-and-chopped-into-tracks)
+* [DJ_DAVE](https://djdave.xyz/)
+
 **Day 4**
 
 
