@@ -2,6 +2,8 @@
 
 Review of what we learned then a little music at the end!
 
+[For making music this is the tool we are using! Its calle strudel](https://strudel.cc/)
+
 What we looked at in class:
 * [Toplap](https://blog.toplap.org/)
 * [ToplapWiki](https://github.com/toplap/awesome-livecoding)
