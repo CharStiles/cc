@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+  
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+      
+function setup() {
+  createCanvas(800, 600); 
+  window.solarFlares = [];
+}
+
+function draw() {
+  background(0);
+  let centerX = width / 2;
+  let centerY = 400; 
+  let radius = 240; 
+  
+  noStroke();
+  for (let i = 5; i > 0; i--) {
+    let alpha = map(i, 1, 5, 20, 60);
+    let r = radius + i * 10;
+    fill(255, 200, 50, alpha);
+    ellipse(centerX, centerY, r * 2, r * 2);
+  }
+  
+  fill(255, 220, 50);
+  noStroke();
+  ellipse(centerX, centerY, radius * 2, radius * 2);
+  
+  drawFlares();
+  
+  updateFlares();
+  
+  fill(0,100,255);
+  noStroke();
+  textSize(14);
+  textAlign(LEFT, TOP);
+  textFont('Arial');
+  
+  let description = "Here is a sun with erupting solar flares. My inspiration comes from the sun itself and some artistic animations—videos that visualize these concepts and turn them into special ambient soundscapes.\n\n";
+  description += "I've been experimenting with curves and circles throughout this class, so I created this.\n\n";
+  description += "In the future, I'd like to add music to control the generation pattern of the solar flares—right now it's random. I didn't have enough time to fully figure out how to make that work.";
+  
+  text(description, 20, 420, width - 40, 160); // 文字从y=420开始
+}
+
+function drawFlares() {
+  for (let i = 0; i < window.solarFlares.length; i++) {
+    let flare = window.solarFlares[i];
+    
+    let age = millis() - flare.birthTime;
+    let lifeProgress = age / flare.lifespan;
+    if (lifeProgress > 1) continue;
+    
+    let alpha;
+    if (lifeProgress < 0.2) {
+      alpha = map(lifeProgress, 0, 0.2, 0, 200);
+    } else if (lifeProgress > 0.7) {
+      alpha = map(lifeProgress, 0.7, 1, 200, 0);
+    } else {
+      alpha = 200;
+    }
+    
+    stroke(flare.color.levels[0], flare.color.levels[1], flare.color.levels[2], alpha);
+    strokeWeight(flare.weight * (1 - lifeProgress * 0.3));
+    
+    noFill();
+    beginShape();
+    for (let j = 0; j < flare.points.length; j++) {
+      let p = flare.points[j];
+      vertex(p.x, p.y);
+    }
+    endShape();
+  }
+}
+
+function updateFlares() {
+  if (random() < 0.02) {
+    createNewFlare();
+  }
+  
+  let now = millis();
+  window.solarFlares = window.solarFlares.filter(flare => {
+    return (now - flare.birthTime) < flare.lifespan;
+  });
+}
+
+function createNewFlare() {
+  let centerX = width / 2;
+  let centerY = 400; // 与draw中的centerY保持一致
+  let radius = 240; // 与draw中的radius保持一致
+  
+  let startRadius = radius;
+  
+  let startAngle = random(-PI, PI);
+  
+  let startX = centerX + cos(startAngle) * startRadius;
+  let startY = centerY + sin(startAngle) * startRadius;
+  
+  let endHaloLayer = floor(random(1, 6));
+  let endRadius = radius + endHaloLayer * 10;
+  
+  let minAngleDiff = 0.15;
+  let maxAngleDiff = 0.35;
+  
+  let direction = random() > 0.5 ? 1 : -1;
+  let endAngleOffset = random(minAngleDiff, maxAngleDiff) * direction;
+  let endAngle = startAngle + endAngleOffset;
+  
+  let endX = centerX + cos(endAngle) * endRadius;
+  let endY = centerY + sin(endAngle) * endRadius;
+  
+  let points = [];
+  points.push({x: startX, y: startY});
+  
+  let avgRadius = (startRadius + endRadius) / 2;
+  let controlRadius = avgRadius * 1.05;
+  
+  let cp1Angle = startAngle + (endAngle - startAngle) * 0.25;
+  let cp1X = centerX + cos(cp1Angle) * controlRadius;
+  let cp1Y = centerY + sin(cp1Angle) * controlRadius;
+  
+  let cp2Angle = startAngle + (endAngle - startAngle) * 0.75;
+  let cp2X = centerX + cos(cp2Angle) * controlRadius;
+  let cp2Y = centerY + sin(cp2Angle) * controlRadius;
+  
+  let steps = 12;
+  for (let t = 1; t <= steps; t++) {
+    let u = t / steps;
+    let x = bezierPoint(startX, cp1X, cp2X, endX, u);
+    let y = bezierPoint(startY, cp1Y, cp2Y, endY, u);
+    points.push({x: x, y: y});
+  }
+  
+  let rCol = random(220, 255);
+  let gCol = random(80, 160);
+  let bCol = random(0, 80);
+  
+  window.solarFlares.push({
+    points: points,
+    color: color(rCol, gCol, bCol),
+    weight: random(1.5, 4),
+    birthTime: millis(),
+    lifespan: random(2000, 5000)
+  });
+}
+
+function bezierPoint(p0, p1, p2, p3, t) {
+  let mt = 1 - t;
+  return mt * mt * mt * p0 + 3 * mt * mt * t * p1 + 3 * mt * t * t * p2 + t * t * t * p3;
+}
+  </script>
+  </body>
+</html>      
