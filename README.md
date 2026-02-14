@@ -10,6 +10,12 @@ What we looked at in class:
 * [song we wrote](https://gist.github.com/CharStiles/ebabbc5f3a79e799212489045301e272)
 * [second song we wrote](https://gist.github.com/CharStiles/56930575288844e82863a6358b15b3fa)
 
+Exercise in class:
+* come up with a final piece! Use the concepts we learned in the past week to create a compelling final project.
+
+Homework:
+* Final Project!
+
 Resources
 * Strudel reference is accessible if you hit the arrow on the right side of the [strudel](https://strudel.cc/) page and click "reference"
   - sound() working with samples, utlizing the clip() function
