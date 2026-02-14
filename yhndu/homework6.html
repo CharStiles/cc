@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+let video;
+let x = 0;
+let setFrameRate = 60;
+
+
+function polarToCartesian(radius, degrees) {
+  const radians = degrees * (Math.PI / 180);
+  return {
+    x: radius * Math.cos(radians),
+    y: radius * Math.sin(radians),
+  };
+}
+
+function setup() {
+  createCanvas(600, 600);
+
+  video = createCapture(VIDEO);
+
+  video.size(width, height);
+  // pixelDesnsity(1);
+  background(0);
+
+  frameRate(setFrameRate);
+  fillInAmt = 360/setFrameRate;
+}
+
+function draw() {
+  translate(width / 2, height / 2);
+
+  video.loadPixels();
+
+  x = (x + width / setFrameRate) % width;
+  
+   for (var sliverHeight = 0; sliverHeight < height; ++sliverHeight) {
+    
+    var xPos = polarToCartesian(sliverHeight / 5 + 400 / 3,(x / width) * 360);
+   
+  
+  for (var fillIn = -fillInAmt ; fillIn < fillInAmt; fillIn = fillIn+0.1){
+        
+      xPos = polarToCartesian(
+      sliverHeight / 5 + 400 / 3,
+      ((x / width) * 360) + fillIn
+    );
+    copy(
+        video,
+        x,
+        sliverHeight,
+        10,
+        video.height,
+        xPos.x,
+        xPos.y,
+        50,
+        10
+      );
+  }
+   }
+  filter(DILATE);
+}
+ </head>
+  <body>
+    <main>
+    </main>
+    <script src="sketch.js"></script>
+  </body>
+</html>
