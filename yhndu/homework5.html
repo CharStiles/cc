@@ -31,14 +31,22 @@
 //YOUR CODE GOES HERE!
 
 setcps(1)
-n("<0 1 2 3 4>*8").scale('G4 minor')
-.s("gm_lead_6_voice")
-.clip(sine.range(.2,.8).slow(8))
-.jux(rev)
-.room(2)
-.sometimes(add(note("12")))
-.lpf(perlin.range(200,20000).slow(4))
+      
+$: //sound("triangle").
+  n("[0 3 0 7]").sound("gm_synth_bass_2")).gain(slider(0.91,0,5))
+    .lpf(perlin.range(200,2000).slow(4))
 
+//.compressor(-20).lpf(slider(277,0,1000)).gain(slider(0.09,0,3))
+//.compressor(-20).lpf(500).gain(slider(0.09,0,3))
+
+$:note("<2 1 2 5 6 4> * 10").scale("E minor").sound("gm_synth_bass_2")
+  //.clip("<.2 .4 .8>")
+  .gain(slider(0,0,3)).room(5.)
+  .sometimes(x=> x.add(note("7"))).lpf(perlin.range(200,2000).slow(4))
+
+
+$: sound("bd!4").bank("rolandtr909").gain(slider(0.386,0,2)).room(.05)
+$: sound("cp * 2").oct("0").gain(slider(0,0,3))
 
 -->
     </strudel-repl>
