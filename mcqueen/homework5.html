@@ -30,14 +30,15 @@
       <!--
 //YOUR CODE GOES HERE!
 
-setcps(1)
-n("<0 1 2 3 4>*8").scale('G4 minor')
-.s("gm_lead_6_voice")
-.clip(sine.range(.2,.8).slow(8))
-.jux(rev)
-.room(2)
-.sometimes(add(note("12")))
-.lpf(perlin.range(200,20000).slow(4))
+$: sound("bd hh*2 rim hh*3 bd [- hh*2] rim hh*2").dec(.4)
+$:note("<[c2 c3]*4 [bb1 bb2]*4 [f2 f3]*4 [eb2 eb3]*4>")
+.sound("sawtooth").lpf(800)
+$: note("<0 1 2 3 4>*8").scale("G4 minor")
+  .clip(sine.range(.2,.8).slow(8)).euclidrot(5,8.,2)
+  .jux(rev)
+  .sound("gm_lead_6_voice").room(2.)
+  .sometimes(x=> x.add(note("12"))).lpf(perlin.range(200,2000).slow(4))._scope()
+
 
 
 -->
