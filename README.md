@@ -1,3 +1,37 @@
+**Day 6**
+
+Some music!
+
+[For making music this is the tool we are using! Its called strudel](https://strudel.cc/)
+
+What we looked at in class:
+* [Toplap](https://blog.toplap.org/)
+* [ToplapWiki](https://github.com/toplap/awesome-livecoding)
+* [song we wrote](https://gist.github.com/CharStiles/ebabbc5f3a79e799212489045301e272)
+* [song we wrote that has a sample](https://gist.github.com/CharStiles/56930575288844e82863a6358b15b3fa)
+
+Resources
+* Strudel reference is accessible if you hit the arrow on the right side of the [strudel](https://strudel.cc/) page and click "reference"
+  - sound() working with samples, utlizing the clip() function
+  - note() working with notes
+  - [mininotation](https://strudel.cc/learn/mini-notation/) working with patterns
+  - perlin(), sometimes() and ribbon() functions to create variety
+  - filters, like room(), diode(), lpf(), fm(), to change the way everything sounds
+  - the strudel website has a page to [walk you through making sounds](https://strudel.cc/workshop/first-sounds/)
+* Book [livecoding manual](https://livecodingbook.toplap.org/)
+* [samples from DJ_DAVE](https://github.com/algorave-dave/samples)
+* [samples from lil data](https://github.com/lil-data/dj_dave-array_remix/tree/main/snd)
+
+Some Livecode Artists
+* [Viola He aka v10101a](https://www.instagram.com/v10101a/?hl=en)
+* Switch Angel: here is her [twitch](https://www.twitch.tv/switchang3l) This is her [youtube where she has more tutorials on strudel.cc](https://www.youtube.com/@Switch-Angel)
+* [alsoknownasrox](https://alsoknownasrox.com/)
+* [c_robo](https://c-robo.bandcamp.com/album/iterations-live-set-11-28-2025-at-grey-space-in-the-middle-edited-and-chopped-into-tracks)
+* [DJ_DAVE](https://djdave.xyz/)
+* [Yaxu](https://yaxu.org/)
+* So many more!!
+
+
 **Day 5**
 
 Review Day!
@@ -11,29 +45,6 @@ Homework:
 Catch up on any homeworks you might have missed or refine a existing homework youre excited about!
 
 
-**Day ?**
-
-Review of what we learned then a little music at the end!
-
-[For making music this is the tool we are using! Its called strudel](https://strudel.cc/)
-
-What we looked at in class:
-* [Toplap](https://blog.toplap.org/)
-* [ToplapWiki](https://github.com/toplap/awesome-livecoding)
-* [song we wrote](https://gist.github.com/CharStiles/56930575288844e82863a6358b15b3fa)
-
-Resources
-* Book [livecoding manual](https://livecodingbook.toplap.org/)
-* [samples from DJ_DAVE](https://github.com/algorave-dave/samples)
-* [samples from lil data](https://github.com/lil-data/dj_dave-array_remix/tree/main/snd)
-
-Some Livecode Artists
-* Switch Angel: here is her [twitch](https://www.twitch.tv/switchang3l) This is her [youtube where she has more tutorials on strudel.cc](https://www.youtube.com/@Switch-Angel)
-* [alsoknownasrox](https://alsoknownasrox.com/)
-* [c_robo](https://c-robo.bandcamp.com/album/iterations-live-set-11-28-2025-at-grey-space-in-the-middle-edited-and-chopped-into-tracks)
-* [DJ_DAVE](https://djdave.xyz/)
-* [Yaxu](https://yaxu.org/)
-* So many more!!
 
 **Day 4**
 
