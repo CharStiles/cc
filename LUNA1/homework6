@@ -1,0 +1,26 @@
+//cps(1)
+
+$: sound("triangle"). note("<F1 Eb1 G0 G1>")._scope().compressor(-20).lpf(500).gain(slider(2.625,0,3))
+
+$:note("<0 1 2 3 4>*8").scale("G4 minor")
+
+$: sound("gm_lead_6_voice")
+  .room(2.)
+  .note("<0 1 2 3 4>*8")
+  .scale("G4 minor")
+  .clip(sine.range(.2,.8).slow(8))
+  .sometimes(x=> x.add(note("12")))
+  .lpf(perlin.range(200,2000)
+       .slow(4))
+
+$: sound("saw").note("<F1 Eb1 G0 G1>")._scope().compressor(-20).lpf(500).gain(slider(0.3,0,3))
+
+
+$: note("<0 1 2 3 4>*8").scale("G4 minor")
+  .clip(sine.range(.2,.8).slow(8)).euclidrot(5,8.,2)
+  .jux(rev)
+  .sound("gm_lead_6_voice").room(2.)
+  .sometimes(x=> x.add(note("12"))).lpf(perlin.range(200,2000).slow(4))
+
+
+$: sound("bd*2").bank("rolandmc303").gain(slider(1.292,0,2))//.room(2.)
