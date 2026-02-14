@@ -28,20 +28,142 @@
   <body>
     <strudel-repl>
       <!--
-setcps(1)
+/*
+  @title   realtionships are our mirrors
+  @by      char stiles
+  @license CC BY-NC-SA (code)
+*/
+setcpm(200 / 4)
 
 
-$: sound("saw").note("<F1 Eb1 G0 G1>")._scope().compressor(-20).lpf(500).gain(slider(0.3,0,3))
+$: s("saw").note("<F1 Eb1 G0 G1>")
+  .fm(slider(2.064, 0, 3)).fmh("0.99, 1.01")//.sometimes(x=>x.euclidrot("<11 [9 8]>/4",16,"<2 3 4>")).ribbon(1,16)
+  .lpf(slider(100, 100, 5000))
+  .diode(1.3)
+  .compressor(-20)
 
-$: note("<0 1 2 3 4>*8").scale("G4 minor")
-  .clip(sine.range(.2,.8).slow(8)).euclidrot(5,8.,2)
-  .jux(rev)
-  .sound("gm_lead_6_voice").room(2.)
-  .sometimes(x=> x.add(note("12"))).lpf(perlin.range(200,2000).slow(4))
+let drums = stack(
+
+ sound("bd*4").bank("Rolandmc303").gain(1.),
+  sound(`
+    <- sd>*4
+  `).bank("RolandTR909").gain(.7),
+  //add a hihat on the off beat (8th note)
+ sound("<- hh>*8").bank("LinnDrum").gain(.2),
+  
+   //sound("~ hh ~ [hh hh] ~ hh ~ hh").sound("slapstick").sometimes(x=>x.jux(rev)).ribbon(2,6).gain(slider(4.5675,0.,7.5)),
+
+ // s("cp * <2 2 2 2 4 4 8 [ 8 16]>".slow(2)).gain(0.4),
+  
+);
+  
+// you can concatenate cycles to change up the notes on each measure
+let bass = cat(
+  "<c2>*4",
+  "<g1>*4",
+  // use flats with b and sharps with #
+  "<eb1>*4",
+  // !n will repeat the note n times
+  // this is equivalent to "<eb1 eb1 f1 f1>*4"
+  "<eb1!2 f1!2>*4",
+  "<c2>*4",
+  "<g1!2 bb1!2>*4",
+  "<eb1>*4",
+  "<f1>*4"
+).note()
+  .n(3).sound("agogo")
+  // use effects to modify a sound
+  // low pass filter allows low frequencies to pass through
+  .lpf(200).lpenv(5).lpa(.5).lps(.8).lpd(.1).gain(7.);
 
 
-$: sound("bd*2").bank("rolandmc303").gain(slider(0.406,0,2))//.room(2.)
+$: bass
+$: drums
 
+let intro_vocals = s("nn").room(.3).rsize(2).gain(4.).sometimes(x=>x.euclidrot("<11 [9 8]>/4",16,"<2 3 4>")).ribbon(1,16);
+
+// modify when the sample begins and ends
+// this sample has 4 lines and we want the first one
+// so start at 0 and cut it just after 1/4
+let vocals01 = s("nn").begin(0).end(.25 + (.25 * .25 * .5))
+  .attack(.25).delay(".25:.45:.4").room(.2).rsize(2).gain(4.)//.sometimes(x=>x.slice("[0.2 0.51 0]","<2. 1. .75>").euclidrot("<11 [9 8]>/4",16,"<2 3 4>")).ribbon(1,16);;
+// start the second one at 1/4 and cut it just after 2/4
+let vocals02 = s("nn").begin(.5).end(.95 + (.25 * .25 * .5))
+  .attack(.25).delay(".25:.45:.4").room(.2).rsize(2).fast(2).gain(9.);
+
+
+
+$: vocals01.mask("<1 2 4 0 1 1 1 0>")
+
+$: vocals02.mask("<1 1 1 1 1 1 1 >")
+$: intro_vocals.mask("<0 0 0 0 0 0 0 0>")
+
+//Drums and such
+//$: s("hh*8").bank("rolandmc303")
+ 
+// $: s(`<
+//   bd@2 ~@2
+//   ~ bd ~@2
+//   bd@2 ~ [bd:0:0.7 bd:0:0.9]
+//   ~ bd ~@2
+//   bd@2 ~@2
+//   ~ bd ~@2
+//   bd@2 ~ ~
+//   ~ [~ bd] ~ bd
+// >*8`).bank("rolandmc303")
+//   .duck(4).duckatt(0.3).duckdepth(0.7)
+// $: s(`<
+//   ~ sd
+// >*4`).bank("rolandmc303")
+
+
+
+// $: s("ride*8").bank("rolandmc303").n(9)
+
+
+
+
+//$: sound("[bd:1]").room(.1)//.delay(1.)
+
+// $: note("<f1!8 c1!8>")
+//   .s("tri")
+//   .color("mediumslateblue")
+//   .gain(slider(0.753, 0, 3))
+//   ._pianoroll()
+
+// $:  sound("sine").note("<[c,eb,g]!2 [c,f,ab] [d,f,ab]>".add("0"))
+//   .arp("3 [3,2] 1 [0,2]").crush(8.0).gain(0.4).lpf(700).room(2.)
+//   .sometimes(x=>x.slow("[2. .5]"))
+//   .ribbon("<15 20 10>/4", 4)
+
+// $:  sound("triangle").note("<[c,eb,g]!2 [c,f,ab] [d,f,ab]>".add("[0 12]/4"))
+//   .arp("3 [3,2] 1 [0,2]").crush(8.0).gain(0.4).lpf(700).room(2.).dec(.2)
+//   .sometimes(x=>x.slow("[2. .5]"))
+//   .ribbon("<10 20>/4", 4)
+
+
+ //$: sound("hh*4").crush(3.).sometimes(x=>x.euclidrot("8 [5 3]/4",16,2 ).jux(rev))
+
+
+
+
+
+
+
+// $:  sound("sine").note("<[c,eb,g]!2 [c,f,ab] [d,f,ab]>".add("<0 [0 12]>"))
+//   .arp("3 [3,2] 1 [0,2]").crush(8.0).gain(1).lpf(1000).room(1).dec(.2)
+//   .sometimes(x=>x.slow("[2. .5]"))
+//   .ribbon("<2 10>/4", 4)
+  
+
+//$: s("wsa_vox:2").mask("[2 2]").chop("0.2 <1 [2]>").gain(0.7).sometimes(x=> x.slow(0.5)).room(1.0).delay(1.)
+
+
+
+// $: s("white")
+// .lpf(10)
+// .lpa(0.5).lpd(0.5).fast(8)//.crush(0.5)
+// .lpenv("12 8").clip(0.1).gain(10.3)._spectrum().duck(7)
 
 
 -->
