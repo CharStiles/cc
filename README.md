@@ -38,7 +38,7 @@ Some Livecode Artists
 * So many more!!
 
 
-bonus:
+bonus! Linking our p5js sketches to change values controlled by the music:
 * using midi1 https://editor.p5js.org/Char/sketches/rJjj5TiUQ
 * $: chord("<C2 C7 Dm7 G7>").euclidRot(9,16,2).voicing().cpm(16).superimpose(x => x.midi('IAC Driver Bus 1').midi('IAC Driver Bus 1'))
 
