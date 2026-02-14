@@ -8,7 +8,7 @@ What we looked at in class:
 * [Toplap](https://blog.toplap.org/)
 * [ToplapWiki](https://github.com/toplap/awesome-livecoding)
 * [song we wrote](https://gist.github.com/CharStiles/ebabbc5f3a79e799212489045301e272)
-* [song we wrote that has a sample](https://gist.github.com/CharStiles/56930575288844e82863a6358b15b3fa)
+* [second song we wrote](https://gist.github.com/CharStiles/56930575288844e82863a6358b15b3fa)
 
 Resources
 * Strudel reference is accessible if you hit the arrow on the right side of the [strudel](https://strudel.cc/) page and click "reference"
