@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.0.3/lib/p5.js"></script>
+    
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+
+let cols = 60;      
+let rows = 40;      
+let cell = 12;     
+
+let wall = [];        
+let water = [];       
+
+function setup() {
+  describe('I want to simulate the ecosystem we do on class, but there is no enough time so I try to simulate the water. However, currently the water look more like the sane. I try to add fish but things dont work as well');
+  createCanvas(cols * cell, rows * cell);
+  noStroke();
+  for (let y = 0; y < rows; y++) {
+    wall[y] = [];
+    water[y] = [];
+    for (let x = 0; x < cols; x++) {
+      wall[y][x] = false;
+      water[y][x] = 0;
+    }
+  }
+
+  const marginX = 6;
+  const marginY = 6;
+  const w = cols - marginX * 2;
+  const h = rows - marginY * 2;
+  const t = 1; 
+
+
+  for (let x = marginX; x < marginX + w; x++) {
+    for (let k = 0; k < t; k++) {
+      wall[marginY + k][x] = true;                 
+      wall[marginY + h - 1 - k][x] = true;         
+    }
+  }
+
+  for (let y = marginY; y < marginY + h; y++) {
+    for (let k = 0; k < t; k++) {
+      wall[y][marginX + k] = true;                 
+      wall[y][marginX + w - 1 - k] = true;         
+    }
+  }
+  describe()
+
+
+
+}
+
+
+function draw() {
+  stepFlowPriority();
+
+  renderScene();
+}
+
+function stepFlowPriority() {
+  let nextWater = water.map(row => row.slice());
+
+
+  const dirs = [
+    {dx: 0, dy: 1},   // 下
+    {dx: 1, dy: 1},   // 右下
+    {dx: -1, dy: 1}   // 左下
+  ];
+
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (water[y][x] <= 0) continue; 
+
+
+      const curWater = water[y][x];
+
+      for (let i = 0; i < dirs.length; i++) {
+        const nx = x + dirs[i].dx;
+        const ny = y + dirs[i].dy;
+
+
+        if (ny < 0 || ny >= rows) continue;
+        if (nx < 0 || nx >= cols) continue;
+        if (wall[ny][nx]) continue;
+
+
+        if (nextWater[ny][nx] >= 1) continue;
+
+
+        nextWater[y][x] -= 1;
+        nextWater[ny][nx] += 1;
+
+        break;
+      }
+    }
+  }
+
+
+  water = nextWater;
+}
+
+
+function renderScene() {
+  background(20);
+
+
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (wall[y][x]) {
+        fill(100);
+        rect(x * cell, y * cell, cell, cell);
+      }
+    }
+  }
+
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      const w = water[y][x];
+      if (w <= 0) continue;
+
+      const shade = computeShade(x, y);
+      const a = constrain(200 * w * shade, 20, 255);
+      fill(30, 144, 255, a);
+      rect(x * cell, y * cell, cell, cell);
+    }
+  }
+}
+function computeShade(x, y) {
+  const hL = heightAt(x - 1, y);
+  const hR = heightAt(x + 1, y);
+  const hU = heightAt(x, y - 1);
+  const hD = heightAt(x, y + 1);
+
+  const dx = hR - hL;
+  const dy = hD - hU;
+
+  let nx = -dx;
+  let ny = -dy;
+  const nz = 1.0;
+  let len = Math.sqrt(nx * nx + ny * ny + nz * nz);
+  if (len > 0) { nx /= len; ny /= len; }
+
+  const Lx = -0.8, Ly = -0.4, Lz = 0.6;
+  const Llen = Math.sqrt(Lx * Lx + Ly * Ly + Lz * Lz);
+  const dxL = Lx / Llen, dyL = Ly / Llen, dzL = Lz / Llen;
+
+  let shade = nx * dxL + ny * dyL + nz * dzL;
+  shade = constrain(shade, 0, 1);
+  shade = 0.5 + 0.5 * shade;
+  return shade;
+}
+
+
+function heightAt(x, y) {
+  if (x < 0 || y < 0 || x >= cols || y >= rows) return 0;
+  if (wall[y][x]) return 1.0;
+  return water[y][x] > 0 ? 0.2 : 0;
+}
+
+function mousePressed() { addWaterAtMouse(); }
+function mouseDragged() { addWaterAtMouse(); }
+function addWaterAtMouse() {
+  const gx = floor(mouseX / cell);
+  const gy = floor(mouseY / cell);
+  if (gx < 0 || gy < 0 || gx >= cols || gy >= rows) return;
+  water[gy][gx] = min(1, water[gy][gx] + 1);
+}
+
+function keyPressed() {
+  if (key === 'r' || key === 'R') {
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        water[y][x] = 0;
+      }
+    }
+  }
+}
+
+</script>
+  
+
+</body></html>
