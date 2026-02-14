@@ -14,7 +14,11 @@ Exercise in class:
 * come up with a final piece! Use the concepts we learned in the past week to create a compelling final project.
 
 Homework:
-* Final Project!
+* Final Project! Create finalProject.html and create a final project that uses something we learned in class in a new way. Write underneath the canvas in the HTML
+  - what is it, in your own words
+  - Why you made this, what where your inspirations
+  - what surprised you
+  - what you would like to change in the future.
 
 Resources
 * Strudel reference is accessible if you hit the arrow on the right side of the [strudel](https://strudel.cc/) page and click "reference"
