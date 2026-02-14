@@ -13,16 +13,160 @@
     <main>
     </main>
     <script>
+let cols = 60;
+let rows = 40;
+let cell = 12;
+let BLOCK_SIZE = cell;
 
-let cols = 60;      
-let rows = 40;      
-let cell = 12;     
+let wall = [];
+let water = [];
+let foods = [];
 
-let wall = [];        
-let water = [];       
+class Food {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+  }
+}
+
+class Seaweed {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.timer = floor(random(60, 180));
+  }
+  update() {
+    if (--this.timer <= 0) {
+
+      if (water[this.y][this.x] > 0) {
+        const fx = this.x * cell + cell / 2;
+        const fy = this.y * cell + cell / 2;
+        foods.push(new Food(fx, fy));
+      }
+      this.timer = floor(random(180, 360));
+    }
+  }
+  render() {
+
+    push();
+    stroke(0, 150, 0);
+    strokeWeight(2);
+    const cx = this.x * cell + cell / 2;
+    const cyTop = this.y * cell;
+    const cyBottom = this.y * cell + cell;
+    line(cx, cyTop, cx, cyBottom);
+    pop();
+  }
+}
+
+let fishList = [];
+let seaweeds = [];
+
+class Fish {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+    this.vel = p5.Vector.random2D().mult(1);
+    this.acc = createVector(0, 0);
+    this.size = max(1, int(BLOCK_SIZE * 0.25)); 
+    this.maxSpeed = 1.6;
+    this.maxForce = 0.08;
+  }
+
+  update() {
+    const gx = floor(this.pos.x / cell);
+    const gy = floor(this.pos.y / cell);
+    const inWater = (gx >= 0 && gy >= 0 && gx < cols && gy < rows && water[gy][gx] > 0);
+    const inWall = (gx >= 0 && gy >= 0 && gx < cols && gy < rows && wall[gy][gx] > 0);
+
+
+    if (inWater && foods.length > 0) {
+      const target = this.closestFood();
+      if (target) {
+        const desired = p5.Vector.sub(target.pos, this.pos).setMag(this.maxSpeed);
+        const steer = p5.Vector.sub(desired, this.vel).limit(this.maxForce);
+        this.acc.add(steer);
+      }
+    }
+    let backPos
+
+
+    if (inWater) {
+      this.vel.add(this.acc);
+      this.vel.limit(this.maxSpeed);
+      this.pos.add(this.vel);
+      this.acc.mult(0);
+
+
+      if (this.pos.x < 0) { this.pos.x = 0; this.vel.x *= -0.5; }
+      else if (this.pos.x > width) { this.pos.x = width; this.vel.x *= -0.5; }
+
+      if (this.pos.y < 0) { this.pos.y = 0; this.vel.y *= -0.5; }
+      else if (this.pos.y > height-cell) { this.pos.y = height; this.vel.y *= -0.5; }
+    } else if (this.pos.x < cell) { this.pos.x = cell; this.vel.x *= -1; }
+      else if (this.pos.x > width-cell) { this.pos.x = width-cell; this.vel.x *= -1; }
+      else if (this.pos.y > height-cell) { this.pos.y = height-cell; this.vel.y *= -1; }
+    else {
+      this.vel.y += 0.3;
+      this.pos.add(this.vel);
+      this.vel.x *= 0.98; 
+
+
+      if (this.pos.y > height - this.size) {
+        this.pos.y = height - this.size;
+        this.vel.y = 0;
+      }
+
+      if (this.pos.x < 0) this.pos.x = 0;
+      if (this.pos.x > width) this.pos.x = width;
+    }
+  }
+
+  closestFood() {
+    let nearest = null;
+    let bestD = Infinity;
+    const sensing = 180;
+    for (let i = 0; i < foods.length; i++) {
+      const d = dist(this.pos.x, this.pos.y, foods[i].pos.x, foods[i].pos.y);
+      if (d < bestD) {
+        bestD = d;
+        nearest = foods[i];
+      }
+    }
+    return (nearest && bestD <= sensing) ? nearest : null;
+  }
+
+  eat(foodList) {
+    for (let i = foodList.length - 1; i >= 0; i--) {
+      const f = foodList[i];
+      if (dist(this.pos.x, this.pos.y, f.pos.x, f.pos.y) < this.size) {
+        foodList.splice(i, 1);
+
+        this.maxSpeed = min(this.maxSpeed + 0.05, 3);
+      }
+    }
+  }
+
+
+
+  render() {
+
+    const ang = this.vel.heading();
+    push();
+    translate(this.pos.x, this.pos.y);
+    rotate(ang);
+    fill(255, 0, 0);
+    noStroke();
+    const w = this.size * 2;
+    const h = this.size * 1.2;
+    rectMode(CENTER);
+    rect(0, 0, w, h);
+    pop();
+  }
+}
+
+let currentTool = 'water'; 
 
 function setup() {
-  describe('I want to simulate the ecosystem we do on class, but there is no enough time so I try to simulate the water. However, currently the water look more like the sane. I try to add fish but things dont work as well');
+  describe('I want to simulate the ecosystem we do on class, but there is no enough time so I try to simulate the water,fish and plant. However, currently the water look more like the sand. I try to add rock and light but it doesnt go as well');
   createCanvas(cols * cell, rows * cell);
   noStroke();
   for (let y = 0; y < rows; y++) {
@@ -34,53 +178,133 @@ function setup() {
     }
   }
 
-  const marginX = 6;
-  const marginY = 6;
+  const marginX = 0;
+  const marginY = 0;
   const w = cols - marginX * 2;
   const h = rows - marginY * 2;
-  const t = 1; 
-
+  const t = 1;
 
   for (let x = marginX; x < marginX + w; x++) {
     for (let k = 0; k < t; k++) {
-      wall[marginY + k][x] = true;                 
-      wall[marginY + h - 1 - k][x] = true;         
+      wall[marginY + k][x] = true;
+      wall[marginY + h - 1 - k][x] = true;
     }
   }
 
   for (let y = marginY; y < marginY + h; y++) {
     for (let k = 0; k < t; k++) {
-      wall[y][marginX + k] = true;                 
-      wall[y][marginX + w - 1 - k] = true;         
+      wall[y][marginX + k] = true;
+      wall[y][marginX + w - 1 - k] = true;
     }
   }
-  describe()
 
 
+  for (let i = 0; i < 8; i++) {
+    let gx = floor(random(cols));
+    let gy = floor(random(rows));
+    let attempts = 0;
+    while ((gy < 0 || gx < 0 || gy >= rows || gx >= cols) || wall[gy][gx] || water[gy][gx] <= 0) {
+      gx = floor(random(cols));
+      gy = floor(random(rows));
+      if (++attempts > 50) break;
+    }
+    if (water[gy][gx] > 0) {
+      const x = gx * cell + cell / 2;
+      const y = gy * cell + cell / 2;
+      fishList.push(new Fish(x, y));
+    }
+  }
 
+  for (let i = 0; i < 40; i++) {
+    let gx = floor(random(cols));
+    let gy = floor(random(rows));
+    let attempts = 0;
+    while ((gy < 0 || gx < 0 || gy >= rows || gx >= cols) || wall[gy][gx] || water[gy][gx] <= 0) {
+      gx = floor(random(cols));
+      gy = floor(random(rows));
+      if (++attempts > 50) break;
+    }
+    if (water[gy][gx] > 0) {
+      const fx = gx * cell + cell / 2;
+      const fy = gy * cell + cell / 2;
+      foods.push(new Food(fx, fy));
+    }
+  }
+
+  for (let i = 0; i < 25; i++) {
+    let gx = floor(random(cols));
+    let gy = floor(random(rows));
+    let attempts = 0;
+    while ((gy < 0 || gx < 0 || gy >= rows || gx >= cols) || wall[gy][gx] || water[gy][gx] <= 0) {
+      gx = floor(random(cols));
+      gy = floor(random(rows));
+      if (++attempts > 50) break;
+    }
+    if (water[gy][gx] > 0) {
+      seaweeds.push(new Seaweed(gx, gy));
+    }
+  }
 }
-
 
 function draw() {
   stepFlowPriority();
 
+
+  for (let s of seaweeds) s.update();
+
+  for (let f of fishList) {
+    f.update();
+    f.eat(foods);
+  }
+
   renderScene();
+  renderHUD();
 }
+
+
+function getGridFromMouse() {
+  const gx = floor(mouseX / cell);
+  const gy = floor(mouseY / cell);
+  if (gx < 0 || gy < 0 || gx >= cols || gy >= rows) return null;
+  return { gx, gy };
+}
+
+function placeCurrentToolAtMouse() {
+  const g = getGridFromMouse();
+  if (!g) return;
+  if (wall[g.gy][g.gx]) return; 
+
+  if (currentTool === 'water') {
+    water[g.gy][g.gx] = min(1, water[g.gy][g.gx] + 1);
+  } else if (currentTool === 'fish') {
+    // 只有在水里格子才放鱼
+    if (water[g.gy][g.gx] > 0) {
+      const x = g.gx * cell + cell / 2;
+      const y = g.gy * cell + cell / 2;
+      fishList.push(new Fish(x, y));
+    }
+  } else if (currentTool === 'plant') {
+    // 放水草（植物）
+    seaweeds.push(new Seaweed(g.gx, g.gy));
+  }
+}
+
+function mousePressed() { placeCurrentToolAtMouse(); }
+function mouseDragged() { placeCurrentToolAtMouse(); }
+
 
 function stepFlowPriority() {
   let nextWater = water.map(row => row.slice());
 
-
   const dirs = [
-    {dx: 0, dy: 1},   // 下
-    {dx: 1, dy: 1},   // 右下
-    {dx: -1, dy: 1}   // 左下
+    {dx: 0, dy: 1},   
+    {dx: 1, dy: 1},   
+    {dx: -1, dy: 1}  
   ];
 
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
-      if (water[y][x] <= 0) continue; 
-
+      if (water[y][x] <= 0) continue;
 
       const curWater = water[y][x];
 
@@ -88,14 +312,11 @@ function stepFlowPriority() {
         const nx = x + dirs[i].dx;
         const ny = y + dirs[i].dy;
 
-
         if (ny < 0 || ny >= rows) continue;
         if (nx < 0 || nx >= cols) continue;
         if (wall[ny][nx]) continue;
 
-
         if (nextWater[ny][nx] >= 1) continue;
-
 
         nextWater[y][x] -= 1;
         nextWater[ny][nx] += 1;
@@ -105,15 +326,13 @@ function stepFlowPriority() {
     }
   }
 
-
   water = nextWater;
 }
-
 
 function renderScene() {
   background(20);
 
-
+  // 墙
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
       if (wall[y][x]) {
@@ -122,6 +341,7 @@ function renderScene() {
       }
     }
   }
+
 
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
@@ -134,7 +354,31 @@ function renderScene() {
       rect(x * cell, y * cell, cell, cell);
     }
   }
+
+
+  for (let s of seaweeds) s.render();
+
+
+  for (let f of foods) {
+    if (!f || !f.pos) continue;
+    fill(70, 130, 180);
+    noStroke();
+    ellipse(f.pos.x, f.pos.y, max(2, cell * 0.6), max(2, cell * 0.6));
+  }
+
+
+  for (let f of fishList) {
+    if (f) f.render();
+  }
 }
+
+function renderHUD() {
+  fill(255);
+  noStroke();
+  textSize(12);
+  text(`Mode: ${currentTool}  | keys: 1 water  2 fish  3 plant  | drag or click`, 12, height - 10);
+}
+
 function computeShade(x, y) {
   const hL = heightAt(x - 1, y);
   const hR = heightAt(x + 1, y);
@@ -160,24 +404,20 @@ function computeShade(x, y) {
   return shade;
 }
 
-
 function heightAt(x, y) {
   if (x < 0 || y < 0 || x >= cols || y >= rows) return 0;
   if (wall[y][x]) return 1.0;
   return water[y][x] > 0 ? 0.2 : 0;
 }
 
-function mousePressed() { addWaterAtMouse(); }
-function mouseDragged() { addWaterAtMouse(); }
-function addWaterAtMouse() {
-  const gx = floor(mouseX / cell);
-  const gy = floor(mouseY / cell);
-  if (gx < 0 || gy < 0 || gx >= cols || gy >= rows) return;
-  water[gy][gx] = min(1, water[gy][gx] + 1);
-}
-
 function keyPressed() {
-  if (key === 'r' || key === 'R') {
+  if (key === '1') {
+    currentTool = 'water';
+  } else if (key === '2') {
+    currentTool = 'fish';
+  } else if (key === '3') {
+    currentTool = 'plant';
+  } else if (key === 'r' || key === 'R') {
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         water[y][x] = 0;
