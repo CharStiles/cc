@@ -31,13 +31,49 @@
 //YOUR CODE GOES HERE!
 
 setcps(1)
-n("<0 1 2 3 4>*8").scale('G4 minor')
-.s("gm_lead_6_voice")
-.clip(sine.range(.2,.8).slow(8))
-.jux(rev)
-.room(2)
-.sometimes(add(note("12")))
-.lpf(perlin.range(200,20000).slow(4))
+
+stack(
+  sound("bd bd ~ ~ bd bd ~ ~")
+    .bank("RolandTR909")
+    .gain(0.25)
+    .room(0.15),
+  
+  sound("~ ~ sd ~ ~ ~ sd ~")
+    .bank("RolandTR909")
+    .gain(0.2)
+    .room(0.2),
+  
+  sound("~ ~ ~ ~ ~ ~ ~ sd ~ ~ ~ ~ ~ ~ ~ ~")
+    .bank("RolandTR909")
+    .gain(0.1)
+    .room(0.1)
+    .cutoff(800),
+  
+  sound("hh*8")
+    .bank("RolandTR909")
+    .gain(0.15)
+    .crush(6),
+
+  note("<C3 Eb3 G3> <F3 Ab3 C4> <G3 Bb3 D4> <C4 Eb4 G4>")
+    .s("gm_distortion_guitar")
+    .gain(0.2)
+    .room(0.3)
+    .cutoff(perlin.range(500, 3000).slow(8))
+    .delay(0.2)
+    .attack(0.02)
+    .release(0.15)
+    .struct("x ~ x ~ x"),
+
+  note("<C2 Eb2 G2> <F2 Ab2 C3> <G2 Bb2 D3> <C3 Eb3 G3>")
+    .s("sawtooth")
+    .gain(0.3)
+    .lpf(300)
+    .attack(0.02)
+    .release(0.15)
+    .struct("x ~ x ~ x ~ x ~")
+    .room(0.2)
+    .cutoff(800)
+)
 
 
 -->
