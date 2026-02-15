@@ -1,3 +1,10 @@
+**Final Day!** 
+
+* In class we will present our final projects
+* Short lecture on review and community
+* [Here is a follow up survey](https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR0Bnm5mOp8BEmtcZvf5pf0xURUMyTlBLRUxYR1EyT0NGTVE2TUg5VlNITC4u)
+
+
 **Day 6**
 
 Some music!
