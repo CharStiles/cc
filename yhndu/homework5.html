@@ -33,20 +33,20 @@
 setcps(1)
       
 $: //sound("triangle").
-  n("[0 3 0 7]").sound("gm_synth_bass_2")).gain(slider(0.91,0,5))
-    .lpf(perlin.range(200,2000).slow(4))
-
+  n("[0 3 0 7]").sound("gm_synth_bass_2").ribbon(1,2)
+    //.bank("gm_electric_bass_finger")
+.gain(slider(0.17,0,5))
 //.compressor(-20).lpf(slider(277,0,1000)).gain(slider(0.09,0,3))
 //.compressor(-20).lpf(500).gain(slider(0.09,0,3))
 
-$:note("<2 1 2 5 6 4> * 10").scale("E minor").sound("gm_synth_bass_2")
+$:note("<2 1 2 5 6 4> * 10").scale("C major").sound("gm_synth_bass_2")
   //.clip("<.2 .4 .8>")
-  .gain(slider(0,0,3)).room(5.)
+  .gain(slider(0.228,0,3)).room(5.)
   .sometimes(x=> x.add(note("7"))).lpf(perlin.range(200,2000).slow(4))
 
 
-$: sound("bd!4").bank("rolandtr909").gain(slider(0.386,0,2)).room(.05)
-$: sound("cp * 2").oct("0").gain(slider(0,0,3))
+$: sound("bd!4").bank("rolandtr909").gain(slider(0.136,0,2)).room(.05)
+$: sound("cp * 2").oct("0").gain(slider(1,0,3))
 
 -->
     </strudel-repl>
